@@ -147,7 +147,7 @@ ArtificialHB.Name = "Heartbeat"
 script:WaitForChild("Heartbeat")
 frame = 0.03333333333333
 tf = 0
-allowframeloss = false
+allowframeloss = true
 tossremainder = false
 lastframe = tick()
 script.Heartbeat:Fire()
