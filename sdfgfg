@@ -1,0 +1,5 @@
+for k, v in pairs(game.Players:GetChildren()) do
+v.Chatted:connect(function(e)
+print(e)
+end)
+end
