@@ -1,0 +1,2082 @@
+if game:GetService("RunService"):IsClient() then error("Script must be server-side in order to work; use h/ and not hl/") end
+local Player,game,owner = owner,game
+local RealPlayer = Player
+do
+    print("FE Compatibility code by Mokiros")
+    local rp = RealPlayer
+    script.Parent = rp.Character
+   
+    --RemoteEvent for communicating
+    local Event = Instance.new("RemoteEvent")
+    Event.Name = "UserInput_Event"
+ 
+    --Fake event to make stuff like Mouse.KeyDown work
+    local function fakeEvent()
+        local t = {_fakeEvent=true,Functions={},Connect=function(self,f)table.insert(self.Functions,f) end}
+        t.connect = t.Connect
+        return t
+    end
+ 
+    --Creating fake input objects with fake variables
+    local m = {Target=nil,Hit=CFrame.new(),KeyUp=fakeEvent(),KeyDown=fakeEvent(),Button1Up=fakeEvent(),Button1Down=fakeEvent()}
+    local UIS = {InputBegan=fakeEvent(),InputEnded=fakeEvent()}
+    local CAS = {Actions={},BindAction=function(self,name,fun,touch,...)
+        CAS.Actions[name] = fun and {Name=name,Function=fun,Keys={...}} or nil
+    end}
+    --Merged 2 functions into one by checking amount of arguments
+    CAS.UnbindAction = CAS.BindAction
+ 
+    --This function will trigger the events that have been :Connect()'ed
+    local function te(self,ev,...)
+        local t = m[ev]
+        if t and t._fakeEvent then
+            for _,f in pairs(t.Functions) do
+                f(...)
+            end
+        end
+    end
+    m.TrigEvent = te
+    UIS.TrigEvent = te
+ 
+    Event.OnServerEvent:Connect(function(plr,io)
+        if plr~=rp then return end
+        m.Target = io.Target
+        m.Hit = io.Hit
+        if not io.isMouse then
+            local b = io.UserInputState == Enum.UserInputState.Begin
+            if io.UserInputType == Enum.UserInputType.MouseButton1 then
+                return m:TrigEvent(b and "Button1Down" or "Button1Up")
+            end
+            for _,t in pairs(CAS.Actions) do
+                for _,k in pairs(t.Keys) do
+                    if k==io.KeyCode then
+                        t.Function(t.Name,io.UserInputState,io)
+                    end
+                end
+            end
+            m:TrigEvent(b and "KeyDown" or "KeyUp",io.KeyCode.Name:lower())
+            UIS:TrigEvent(b and "InputBegan" or "InputEnded",io,false)
+        end
+    end)
+    Event.Parent = NLS([==[
+    local Player = game:GetService("Players").LocalPlayer
+    local Event = script:WaitForChild("UserInput_Event")
+ 
+    local Mouse = Player:GetMouse()
+    local UIS = game:GetService("UserInputService")
+    local input = function(io,a)
+        if a then return end
+        --Since InputObject is a client-side instance, we create and pass table instead
+        Event:FireServer({KeyCode=io.KeyCode,UserInputType=io.UserInputType,UserInputState=io.UserInputState,Hit=Mouse.Hit,Target=Mouse.Target})
+    end
+    UIS.InputBegan:Connect(input)
+    UIS.InputEnded:Connect(input)
+ 
+    local h,t
+    --Give the server mouse data 30 times every second, but only if the values changed
+    --If player is not moving their mouse, client won't fire events
+    while wait(1/30) do
+        if h~=Mouse.Hit or t~=Mouse.Target then
+            h,t=Mouse.Hit,Mouse.Target
+            Event:FireServer({isMouse=true,Target=t,Hit=h})
+        end
+    end]==],Player.Character)
+ 
+    ----Sandboxed game object that allows the usage of client-side methods and services
+    --Real game object
+    local _rg = game
+ 
+    --Metatable for fake service
+    local fsmt = {
+        __index = function(self,k)
+            local s = rawget(self,"_RealService")
+            if s then return s[k] end
+        end,
+        __newindex = function(self,k,v)
+            local s = rawget(self,"_RealService")
+            if s then s[k]=v end
+        end,
+        __call = function(self,...)
+            local s = rawget(self,"_RealService")
+            if s then return s(...) end
+        end
+    }
+    local function FakeService(t,RealService)
+        t._RealService = typeof(RealService)=="string" and _rg:GetService(RealService) or RealService
+        return setmetatable(t,fsmt)
+    end
+ 
+    --Fake game object
+    local g = {
+        GetService = function(self,s)
+            return self[s]
+        end,
+        Players = FakeService({
+            LocalPlayer = FakeService({GetMouse=function(self)return m end},Player)
+        },"Players"),
+        UserInputService = FakeService(UIS,"UserInputService"),
+        ContextActionService = FakeService(CAS,"ContextActionService"),
+    }
+    rawset(g.Players,"localPlayer",g.Players.LocalPlayer)
+    g.service = g.GetService
+   
+    g.RunService = FakeService({
+        RenderStepped = _rg:GetService("RunService").Heartbeat,
+        BindToRenderStep = function(self,name,_,fun)
+            self._btrs[name] = self.Heartbeat:Connect(fun)
+        end,
+        UnbindFromRenderStep = function(self,name)
+            self._btrs[name]:Disconnect()
+        end,
+    },"RunService")
+ 
+    setmetatable(g,{
+        __index=function(self,s)
+            return _rg:GetService(s) or typeof(_rg[s])=="function"
+            and function(_,...)return _rg[s](_rg,...)end or _rg[s]
+        end,
+        __newindex = fsmt.__newindex,
+        __call = fsmt.__call
+    })
+    --Changing owner to fake player object to support owner:GetMouse()
+    game,owner = g,g.Players.LocalPlayer
+end
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed=300 game.Players.LocalPlayer.Character.Humanoid.JumpPower=0.0001 Float_Height="-1.03" AnimationId="129342287" local a=Instance.new("Animation") a.AnimationId="rbxassetid://"..AnimationId local a=game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(a) a:Play() a:AdjustSpeed(1) for a,a in pairs(game.Players.LocalPlayer.Character:GetDescendants())do if a.ClassName=="Part"then a.CustomPhysicalProperties=PhysicalProperties.new(0,0,0)end end local a=1 G=game _=wait p=G:GetService("Players").LocalPlayer.Character p:FindFirstChild("Humanoid").HipHeight=Float_Height _(1.5) t=.4 for a=1,a do repeat p:FindFirstChild("Humanoid").HipHeight=Float_Height-n _(t) p:FindFirstChild("Humanoid").HipHeight=Float_Height+n _(t)until p:FindFirstChild("Humanoid").Health==0 end
+game.Players.LocalPlayer.Character.Humanoid.Animator:Destroy() game.Players.LocalPlayer.Character.Animate:Destroy()
+
+wait(0.2)
+
+
+_F=require(script.replicator)
+Mouse,mouse,UserInputService,ToolFunction,GuiWire,RenderStepped,Player=_F,_F,_F,_F,_F,_F.RenderStepped,_F.LocalPlayer
+-----------------------------------------------------------------------
+local plr = Player
+
+function noo(b)
+                        b.BackSurface = Enum.SurfaceType.Smooth
+                        b.BottomSurface = Enum.SurfaceType.Smooth
+                        b.FrontSurface = Enum.SurfaceType.Smooth
+                        b.LeftSurface = Enum.SurfaceType.Smooth
+                        b.RightSurface = Enum.SurfaceType.Smooth
+                        b.TopSurface = Enum.SurfaceType.Smooth
+end
+
+--//=================================\\--
+--||	Script made by Subaru112     ||--
+--\\=================================//--
+
+local char = plr.Character
+local chara = char
+
+if char:FindFirstChild("Animate") ~= nil then
+chara.Animate.Disabled = true
+end
+
+local RootPart = chara.HumanoidRootPart
+local RootJoint = RootPart.RootJoint
+local debby = game:GetService("Debris")
+local Humanoid = char:FindFirstChildOfClass("Humanoid")
+local Torso,Head,LeftArm,RightArm,LeftLeg,RightLeg,Root = char.Torso,char.Head,char["Left Arm"],char["Right Arm"],char["Left Leg"],char["Right Leg"],char.HumanoidRootPart
+local Neck = Torso.Neck
+local ff = Instance.new("ForceField",char)
+ff.Visible = false
+local stopped = false
+local plrn = plr.Name
+local np = char.Parent
+
+--//=================================\\--
+--||	       Some things           ||--
+--\\=================================//--
+
+angles = CFrame.Angles
+Rad = math.rad
+local angles = CFrame.Angles
+local ANGLES = angles
+local Rad = math.rad
+--local sine = 0
+local change = 1
+local attack = false
+local Anim = 'Idle'
+local Torsovelocity = (RootPart.Velocity * Vector3.new(1, 0, 1)).magnitude
+local velocity = RootPart.Velocity.y
+local spd = 12
+local ls = "Hi"
+local MAINCOLOR = BrickColor.new("Black").Color
+local VOL = 0.8
+local volumemultiply = 1
+local PIT = 1
+local SongId = 649587991
+local maxhealth = 1700
+local SickLoud = 0
+local transaa = false
+
+--//=================================\\--
+--||Customize character a little bit.||--
+--\\=================================//--
+
+local Effects = Instance.new("Folder",char)
+Effects.Name = "Effects"
+
+if char:FindFirstChild("Animate") ~= nil then
+chara.Animate.Parent = nil
+end
+
+local eye1 = Instance.new("Part",Head)
+eye1.BrickColor = BrickColor.new("White")
+eye1.Material = "Neon"
+noo(eye1)
+eye1.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+eye1.CanCollide = false
+eye1.Size = Vector3.new(0.2,0.35,0.2)
+local e1m = Instance.new("SpecialMesh",eye1)
+e1m.MeshType = "Sphere"
+local e1w = Instance.new("Weld",Head)
+e1w.Part0 = Head
+e1w.Part1 = eye1
+e1w.C0 = CFrame.new(0.22,0.1,-0.5)
+
+local eye2 = Instance.new("Part",Head)
+eye2.BrickColor = BrickColor.new("White")
+eye2.Material = "Neon"
+noo(eye2)
+eye2.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+eye2.CanCollide = false
+eye2.Size = Vector3.new(0.2,0.35,0.2)
+local e2m = Instance.new("SpecialMesh",eye2)
+e2m.MeshType = "Sphere"
+local e2w = Instance.new("Weld",Head)
+e2w.Part0 = Head
+e2w.Part1 = eye2
+e2w.C0 = CFrame.new(-0.22,0.1,-0.5)
+
+spawn(function()
+	while wait(4) do
+		for i = 1,10 do
+			swait()
+			eye1.Size = eye1.Size - Vector3.new(0,0.34/10,0)
+			eye2.Size = eye2.Size - Vector3.new(0,0.34/10,0)
+		end
+		for i = 1,10 do
+			swait()
+			eye1.Size = eye1.Size + Vector3.new(0,0.34/10,0)
+			eye2.Size = eye2.Size + Vector3.new(0,0.34/10,0)
+		end
+	end
+end)
+
+for i,s in pairs(char:children()) do
+	if s:IsA("Script") and s.Name == "Health" then
+		s:Destroy()
+	end
+end
+
+local idleanim = Instance.new("Animation")
+idleanim.Name = "Roblox Idle Animation"
+idleanim.AnimationId = "http://www.roblox.com/asset/?id=180435571"
+local idleanimplay = Humanoid:LoadAnimation(idleanim)
+idleanimplay:Play()
+wait(0.2)
+
+Humanoid.WalkSpeed = spd
+
+if Humanoid:FindFirstChild("Animator") ~= nil then
+Humanoid.Animator.Parent = nil
+end
+Humanoid.MaxHealth = maxhealth
+Humanoid.Health = Humanoid.MaxHealth
+
+--//=================================\\--
+--||      Artificial Heartbeat       ||--
+--\\=================================//-- 
+ArtificialHB = Instance.new("BindableEvent", script)
+ArtificialHB.Name = "Heartbeat"
+script:WaitForChild("Heartbeat")
+frame = 0.03333333333333
+tf = 0
+allowframeloss = false
+tossremainder = false
+lastframe = tick()
+script.Heartbeat:Fire()
+game:GetService("RunService").Heartbeat:connect(function(s, p)
+tf = tf + s
+if tf >= frame then
+if allowframeloss then
+script.Heartbeat:Fire()
+lastframe = tick()
+else
+for i = 1, math.floor(tf / frame) do
+script.Heartbeat:Fire()
+end
+lastframe = tick()
+end
+if tossremainder then
+tf = 0
+else
+tf = tf - frame * math.floor(tf / frame)
+end
+end
+end)
+ 
+function swait(num)
+if num == 0 or num == nil then
+ArtificialHB.Event:wait()
+else
+for i = 0, num do
+ArtificialHB.Event:wait()
+end
+end
+end
+
+--//=================================\\--
+--||          Some functions         ||--
+--\\=================================//-- 
+
+function clerp(a, b, t)
+return a:lerp(b, t)
+end
+
+function rayCast(Position, Direction, Range, Ignore)
+return game:service("Workspace"):FindPartOnRay(Ray.new(Position, Direction.unit * (Range or 999.999)), Ignore)
+end
+
+function un_anchor(p)
+	for i,v in pairs(p:GetChildren()) do
+		if v:IsA("BasePart") then
+			v.Anchored = false
+		end
+		if v ~= Effects then
+		for i,s in pairs(v:GetChildren()) do
+			if s:IsA("BasePart") then
+				s.Anchored = false
+			end
+			for i,q in pairs(s:GetChildren()) do
+			if q:IsA("BasePart") then
+				q.Anchored = false
+			end
+			for i,e in pairs(q:GetChildren()) do
+			if e:IsA("BasePart") then
+				e.Anchored = false
+			end
+		end
+		end
+		end
+		end
+	end
+end
+
+local mus
+
+function chat_plr(msg)
+	if transaa == true then
+		local point = Instance.new("Part",Effects)
+		point.Size = Vector3.new(0.1,0.1,0.1)
+		point.Anchored = true
+		point.CanCollide = false
+		point.CFrame = Torso.CFrame
+		point.Transparency = 1
+		local a = script.Sand:Clone()
+		a.Parent = point
+		a.Adornee = point
+		a.Enabled = true
+		local s = sound(137473066, 3, 1, point, true, 0.5, false)
+		s.EmitterSize = 40
+		game.Debris:AddItem(point, s.TimeLength + 1)
+	end
+	if msg:lower():sub(1, 5) == 'play/' then
+		SongId = msg:lower():sub(6)
+		mus.TimePosition = 0
+		end
+		if msg:lower():sub(1, 6) == 'pitch/' then
+		PIT = msg:lower():sub(7)
+		end
+		if msg:lower():sub(1, 7) == 'volume/' then
+		VOL = msg:lower():sub(8)
+		end
+		if msg:lower():sub(1, 2) == 'p/' then
+		SongId = msg:lower():sub(3)
+		mus.TimePosition = 0
+		end
+		if msg:lower():sub(1, 4) == 'pit/' then
+		PIT = msg:lower():sub(5)
+		end
+		if msg:lower():sub(1, 4) == 'vol/' then
+		VOL = msg:lower():sub(5)
+		end
+end
+
+plr.Chatted:Connect(chat_plr)
+
+function chatfunc(text,waitt,wait2)
+local chat = coroutine.wrap(function()
+if char:FindFirstChild("TalkingBillBoard")~= nil then
+char:FindFirstChild("TalkingBillBoard"):destroy()
+end
+local naeeym3 = Instance.new("BillboardGui",char)
+naeeym3.Size = UDim2.new(0,100,0,40)
+naeeym3.StudsOffset = Vector3.new(0,5,0)
+naeeym3.Adornee = char.Head
+naeeym3.Name = "TalkingBillBoard"
+naeeym3.AlwaysOnTop = true
+local tecks3 = Instance.new("TextLabel",naeeym3)
+tecks3.BackgroundTransparency = 1
+tecks3.BorderSizePixel = 0
+tecks3.Text = ""
+tecks3.Font = "SourceSans"
+tecks3.TextSize = 30
+tecks3.TextStrokeTransparency = 1
+tecks3.TextColor3 = MAINCOLOR
+tecks3.TextStrokeColor3 = MAINCOLOR
+tecks3.Size = UDim2.new(1,0,0.5,0)
+for i = 1,string.len(text),1 do
+tecks3.Text = string.sub(text,1,i)
+wait(wait2/string.len(text))
+end
+wait(waitt)
+coroutine.resume(coroutine.create(function()
+	for i = 1, 10 do
+		tecks3.TextTransparency = tecks3.TextTransparency + 0.1
+		swait()
+	end
+	naeeym3:Destroy()
+end))
+end)
+chat()
+end
+
+
+function chatfunc2(text,wai)
+	chatfunc(text,0.2, wai - 0.2)
+	ls = text
+end
+
+
+chatfunc("By Subaru112 :)",1,1)
+
+--//=================================\\--
+--||           Make Joints           ||--
+--\\=================================//-- 
+
+local RW = Torso:WaitForChild("Right Shoulder")
+local LW = Torso:WaitForChild("Left Shoulder")
+local RH = Torso:WaitForChild("Right Hip")
+local LH = Torso:WaitForChild("Left Hip")
+
+local RootJointC0 = CFrame.new(0, 0, 0) * angles(Rad(-90), Rad(0), Rad(180))
+local NeckC0 = CFrame.new(0, 1, 0) * angles(Rad(-90), Rad(0), Rad(180))
+local RightShoulderC0 = CFrame.new(-0.5, 0, 0) * angles(Rad(0), Rad(90), Rad(0))
+local LeftShoulderC0 = CFrame.new(0.5, 0, 0) * angles(Rad(0), Rad(-90), Rad(0))
+local RightHipC0 = CFrame.new(0, 0, 0) * angles(Rad(0), Rad(90), Rad(0))
+local LeftHipC0 = CFrame.new(0, 0, 0) * angles(Rad(0), Rad(-90), Rad(0))
+
+--//=================================\\--
+--||     Some Animation functions    ||--
+--\\=================================//-- 
+
+local rarmc1 = RW.C1
+local larmc1 = LW.C1
+local rlegc1 = RH.C1
+local llegc1 = LH.C1
+
+local resetc1 = false
+
+function PlayAnimationFromTable(table, speed, bool)
+RootJoint.C0 = clerp(RootJoint.C0, table[1], speed) 
+Torso.Neck.C0 = clerp(Torso.Neck.C0, table[2], speed) 
+RW.C0 = clerp(RW.C0, table[3], speed) 
+LW.C0 = clerp(LW.C0, table[4], speed) 
+RH.C0 = clerp(RH.C0, table[5], speed) 
+LH.C0 = clerp(LH.C0, table[6], speed) 
+end
+
+local Point = Mouse.Hit.p
+					Dist = (Head.CFrame.p-Point).magnitude
+					Diff = Head.CFrame.Y-Point.Y
+
+local look = angles((math.atan(Diff/Dist)*0.6), 0, (((Head.CFrame.p-Point).Unit):Cross(Torso.CFrame.lookVector)).Y*1)
+local sh1 = CFrame.Angles(0, 0, 0)
+local sh2 = CFrame.Angles(0, 0, 0)
+local sh3 = CFrame.Angles(0, 0, 0)
+
+--//=================================\\--
+--||              Sounds             ||--
+--\\=================================//-- 
+
+mus = Instance.new("Sound",RootPart)
+local timepos = 0
+local RemoteBackup = script:WaitForChild("MusicRemote")
+RemoteBackup.Parent = nil
+local Remote = RemoteBackup:Clone()
+Remote.Parent = mus
+Remote.SickControl.Disabled = false
+mus:Destroy()
+
+local breathe = Instance.new("Sound",RootPart)
+local btimepos = 0
+breathe:Destroy()
+
+function sound(id,vol,pitch,par,remv,tim,shot)
+s = Instance.new("Sound",par)
+s.SoundId = "rbxassetid://"..id
+s.Volume = vol
+s.Pitch = pitch
+s.TimePosition = tim
+if remv == true then
+s.Playing = true
+else
+s.Looped = true
+s.Playing = true
+end
+game.Debris:AddItem(s, s.TimeLength + 10)
+if shot == true then
+	game.Debris:AddItem(s, s.TimeLength / 3.5)
+end
+return s
+end
+
+function echosound(id,vol,pitch,par,tim,echodelay,feedb,dryl)
+s = Instance.new("Sound",par)
+s.SoundId = "rbxassetid://"..id
+s.Volume = vol
+s.Pitch = pitch
+s.TimePosition = tim
+local e = Instance.new("EchoSoundEffect",s)
+e.Delay = echodelay
+e.Feedback = feedb
+e.DryLevel = dryl
+s.Playing = true
+game.Debris:AddItem(s, s.TimeLength + 10)
+return s
+end
+
+--//=================================\\--
+--||         Attack functions        ||--
+--\\=================================//-- 
+
+
+function Raycast(POSITION, DIRECTION, RANGE, IGNOREDECENDANTS)
+	return workspace:FindPartOnRay(Ray.new(POSITION, DIRECTION.unit * RANGE), IGNOREDECENDANTS)
+end
+
+function CastProperRay(StartPos, EndPos, Distance, Ignore)
+	local DIRECTION = CFrame.new(StartPos,EndPos).lookVector
+	return Raycast(StartPos, DIRECTION, Distance, Ignore)
+end
+
+sound(260433721, 0, 0.9, Effects, true, 0, false)
+sound(260433768, 0, 0.9, Effects, true, 0, false)
+sound(260433768, 0, 0.9, Effects, true, 0, false)
+
+function Scan_Humanoids(list, vi, range, paret, ignore)
+	for i,v in pairs(vi:children()) do
+		if v:FindFirstChildOfClass("Humanoid") ~= nil and v ~= ignore then
+			local fand = false
+			for i,a in pairs(list) do
+				if a == v:FindFirstChildOfClass("Humanoid") then
+					return
+				end
+			end
+			for i,s in pairs(v:children()) do
+				if s:IsA("BasePart") and fand == false then
+					local targ = s.Position - paret.Position
+					local mag = targ.magnitude
+					if range >= mag then
+						fand = true
+						table.insert(list, v:FindFirstChildOfClass("Humanoid"))
+					end
+				end
+			end
+		end
+		if v ~= ignore then
+		Scan_Humanoids(list, v, range, paret, ignore)
+		end
+	end
+end
+
+
+
+
+function ringeff(pos,color,speed,siz)
+	local ringg = Instance.new("Part",Effects)
+	ringg.Name = "Ring"
+	ringg.Anchored = true
+	ringg.CanCollide = false
+	ringg.Size = Vector3.new(1,1,1)
+	local ringm = Instance.new("FileMesh",ringg)
+	ringm.Scale = Vector3.new(1,1,1)
+	ringm.MeshId = "rbxassetid://559831844"
+	ringm.Scale = Vector3.new(0.1,0.1,0.1)
+	ringg.Material = "Neon"
+	ringg.Color = color
+	ringg.Position = pos
+	ringg.Orientation = Vector3.new(math.random(-360,360),math.random(-360,360),math.random(-360,360))
+	spawn(function()
+	for i = 1,speed do
+		swait()
+		ringg.Transparency = ringg.Transparency + 1/speed
+		ringm.Scale = ringm.Scale + Vector3.new(siz/speed,siz/speed,0)
+	end
+	game.Debris:AddItem(ringg,0)
+	end)
+end
+
+function shatter(cha)
+	if cha:FindFirstChildOfClass("Humanoid") ~= nil then
+	--sound(1192402877, 1, 0.75, Effects, true, 0, true)
+	for i,v in pairs(cha:children()) do
+		if v:IsA("BasePart") then
+			--v:ClearAllChildren()
+			local vvc = Instance.new("Part",Effects)
+			vvc.Size = v.Size
+			vvc.Color = v.Color
+			vvc.CanCollide = true
+			vvc.Anchored = false
+			vvc.CFrame = v.CFrame
+			vvc.Transparency = v.Transparency
+			game.Debris:AddItem(v,0)
+			local v2 = vvc
+			local vc = script.Particle:Clone()
+			vc.Enabled = true
+			vc.Parent = v2
+			v2.Anchored = false
+			noo(v2)
+			spawn(function()
+				wait(0.2)
+			local bodv = Instance.new("BodyPosition",v2)
+			bodv.MaxForce = Vector3.new(9e9,9e9,9e9)
+			bodv.D = 10000
+			bodv.Position = v.Position + Vector3.new(0,100,0)
+			trans(v2)
+			trans2(v2)
+			end)
+		end
+		shatter(v)
+	end
+	end
+end
+
+function trans(v)
+	
+	for i,s in pairs(v:children()) do
+		if s:IsA("BasePart") then
+	spawn(function()
+	for i = 1,50 do
+		swait()
+		s.Transparency = s.Transparency + 1/49
+	end
+	game.Debris:AddItem(s,1)
+	if s:FindFirstChildOfClass("ParticleEmitter") ~= nil then
+		s:FindFirstChildOfClass("ParticleEmitter").Enabled = false
+	end
+	end)
+	end
+	trans(s)
+	end
+	
+end
+
+function trans2(s)
+	spawn(function()
+	for i = 1,50 do
+		swait()
+		s.Transparency = s.Transparency + 1/49
+	end
+	game.Debris:AddItem(s,1)
+	if s:FindFirstChildOfClass("ParticleEmitter") ~= nil then
+		s:FindFirstChildOfClass("ParticleEmitter").Enabled = false
+	end
+	end)
+end
+
+function CIRCLE(start, speed, siz, sizeA)
+	local Bullet = Instance.new("Part",Effects)
+			Bullet.Color = MAINCOLOR
+Bullet.Material = "Neon"
+Bullet.CanCollide = false
+Bullet.Anchored = true
+Bullet.Position = start
+Bullet.Size = Vector3.new(0.6, 0.6, 0.6)
+Bullet.Orientation = Vector3.new(math.random(-360, 360), math.random(-360, 360), math.random(-360, 360))
+local spm = Instance.new("SpecialMesh", Bullet)
+spm.MeshType = "Sphere"
+spm.Scale = sizeA
+Bullet.Anchored = true
+spawn(function()
+Bullet_Resize(spm, speed, siz, Bullet)
+end)
+return Bullet
+end
+
+function gnecko(a1, a2, a3)
+	local cfr = CFrame.new(-a3/100, 0 + a1/100/2, -(a1/100 + ((a1/100)-((a1/50))) )) * angles(a1, a2, a3)
+	return cfr
+end
+
+function Bullet_Resize(spm, speed, siz, Bullet)
+	for i = 1,speed do
+		wait()
+		Bullet.Orientation = Bullet.Orientation + Vector3.new(5, 0, 5)
+		spm.Scale = spm.Scale + Vector3.new(siz.X/speed, siz.Y/speed, siz.Z/speed)
+		Bullet.Transparency = Bullet.Transparency + 1/speed
+	end
+	game.Debris:AddItem(Bullet, 0)
+end
+
+local s1 = Instance.new("Sound",Effects)
+local s2 = Instance.new("Sound",Effects)
+
+function switchsound()
+	if s1 ~= nil and s1.Parent ~= nil then
+		s1:Destroy()
+	end
+	if s2 ~= nil and s2.Parent ~= nil then
+		s2:Destroy()
+	end
+	s1 = sound(847061203, 3 / 3, 1, Effects, true, 0, false)
+	s2 = echosound(847061203, 1 / 3, 1, Effects, 0, 0.25, 0.25, 1)
+end
+
+sound(206082327, 0, 1, Effects, true, 0 ,false)
+	sound(847061203, 0, 1, Effects, true, 0 ,false)
+	sound(239000203, 0, 1, Effects, true, 0 ,false)
+	sound(579687077, 0, 0.75, Effects, true, 0 ,false)
+sound(847061203, 0, 1, Effects, true, 0, false)
+sound(138122923, 0, 1, Effects, true, 0, false)
+sound(566593606, 0, 1, Effects, true, 0, false)
+sound(429400881, 0, 1, Effects, true, 0, false)
+
+local dancing = false
+
+local combo = 1
+
+sound(200632136, 0, 1, Effects, true, 0, false)
+
+function punch()
+	attack = true
+	Humanoid.WalkSpeed = spd/2
+	if combo == 1 then
+	combo = 2
+	for i = 1, 10 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, 0, 0) * angles(Rad(-20), Rad(-30), 0) * RootJointC0,
+CFrame.new(0, 0, 0) * angles(0, Rad(30), 0) * NeckC0,
+CFrame.new(1.5, 0.5, 0.3) * angles(Rad(90), 0, 0) * angles(0, 0, 0) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1, 0) * angles(Rad(0), Rad(30), 0) * RightHipC0,
+CFrame.new(-1, -1, 0) * angles(Rad(60), Rad(30), Rad(-30)) * LeftHipC0,
+	}, .5, false)
+	end
+	local s = echosound(200632136, 3, 1, RightArm, 0, 0.05, 0, 1)
+		s.EmitterSize = 50
+	spawn(function()
+		local targs = {}
+		repeat 
+		wait() 
+		
+		for i,v in pairs(workspace:GetDescendants()) do
+		if v.Parent:FindFirstChildOfClass("Humanoid") ~= nil and v:IsA("BasePart") then
+			local aa = true
+			for i,s in pairs(targs) do
+				if s == v.Parent then
+					aa = false
+				end
+			end
+			if aa == true then
+				table.insert(targs, v.Parent)
+			local hum = v.Parent:FindFirstChildOfClass("Humanoid")
+			local targ = v.Position - RightArm.Position
+local mag = targ.magnitude
+if 5 >= mag and v.Parent ~= char then
+	if hum.Health ~= math.huge and hum.Health ~= "inf" then
+		hum.Health = hum.Health - math.random(20, 40) * (hum.MaxHealth/100)
+	else
+		v.Parent:BreakJoints()
+	end
+end
+		end
+		end
+		end
+		
+		until attack == false
+	end)
+	for i = 1, 15 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, 0, -2.5) * angles(Rad(-20), Rad(30), 0) * RootJointC0,
+CFrame.new(0, 0, 0) * angles(0, Rad(-20), 0) * NeckC0,
+CFrame.new(1.2, 0.5, -0.3) * angles(Rad(110), 0, Rad(-10)) * angles(0, 0, 0) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1, 0) * angles(Rad(60), Rad(-30), 0) * RightHipC0,
+CFrame.new(-1, -1, 0) * angles(Rad(-60), Rad(-30), Rad(-30)) * LeftHipC0,
+	}, .5, false)
+	end
+	else
+		combo = 1
+		
+		
+		for i = 1, 10 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, 0, 0) * angles(Rad(-20), Rad(30), 0) * RootJointC0,
+CFrame.new(0, 0, 0) * angles(0, Rad(-30), 0) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0.3) * angles(Rad(90), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1, 0) * angles(Rad(60), Rad(-30), Rad(30)) * RightHipC0,
+CFrame.new(-1, -1, 0) * angles(Rad(0), Rad(-30), 0) * LeftHipC0,
+	}, .5, false)
+		end
+		
+		local s = echosound(200632136, 3, 1, LeftArm, 0, 0.05, 0, 1)
+		s.EmitterSize = 50
+	spawn(function()
+		local targs = {}
+		repeat 
+		wait() 
+		
+		for i,v in pairs(workspace:GetDescendants()) do
+		if v.Parent:FindFirstChildOfClass("Humanoid") ~= nil and v:IsA("BasePart") then
+			local aa = true
+			for i,s in pairs(targs) do
+				if s == v.Parent then
+					aa = false
+				end
+			end
+			if aa == true then
+				table.insert(targs, v.Parent)
+			local hum = v.Parent:FindFirstChildOfClass("Humanoid")
+			local targ = v.Position - LeftArm.Position
+local mag = targ.magnitude
+if 5 >= mag and v.Parent ~= char then
+	if hum.Health ~= math.huge and hum.Health ~= "inf" then
+		hum.Health = hum.Health - math.random(20, 40) * (hum.MaxHealth/100)
+	else
+		v.Parent:BreakJoints()
+	end
+end
+		end
+		end
+		end
+		
+		until attack == false
+	end)
+		
+	for i = 1, 15 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, 0, -2.5) * angles(Rad(-20), Rad(-30), 0) * RootJointC0,
+CFrame.new(0, 0, 0) * angles(0, Rad(20), 0) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(0, 0, 0) * RightShoulderC0,
+CFrame.new(-1.2, 0.5, -0.3) * angles(Rad(90), 0, Rad(40)) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1, 0) * angles(Rad(-60), Rad(30), Rad(30)) * RightHipC0,
+CFrame.new(-1, -1, 0) * angles(Rad(60), Rad(30), 0) * LeftHipC0,
+	}, .5, false)
+	end
+	
+	end
+	attack = false
+end
+
+function Visualize_Bullet(start,endd)
+	local Bullet = Instance.new("Part",Effects)
+			Bullet.BrickColor = cols[math.random(1,#cols)]
+Bullet.Material = "Neon"
+Bullet.CanCollide = false
+Bullet.Anchored = true
+Bullet.CFrame = CFrame.new((start + endd)/2, endd)
+Bullet.Size = Vector3.new(0.1, 0.1,(start - endd).magnitude)
+Bullet.Anchored = true
+spawn(function()
+Bullet_Resize(Bullet)
+end)
+return Bullet
+end
+
+function Bullet_Resize(Bullet)
+	for i = 1,10 do
+		wait()
+		Bullet.Size = Bullet.Size + Vector3.new(0.5/10, 0.5/10, 0)
+		Bullet.Transparency = Bullet.Transparency + 1/10
+	end
+	game.Debris:AddItem(Bullet, 0)
+end
+
+
+function kill(ch)
+	local chc = ch:Clone()
+	game.Debris:AddItem(ch,0)
+	local li = {}
+	local a = Instance.new("Model",Effects)
+	a.Name = chc.Name
+	chc.Parent = a
+	for i,v in pairs(a:GetDescendants()) do
+		if v:IsA("BasePart") and v.Transparency <= 0.9 and v.Name ~= "Baseplate" then
+			v.CanCollide = true
+			end
+		end
+	for i,v in pairs(a:GetDescendants()) do
+		if v:IsA("BasePart") and v.Transparency <= 0.9 and v.Name ~= "Baseplate" then
+		table.insert(li,v)
+		end
+	end
+	local cunt = #li
+	
+	repeat
+		wait()
+		local v = li[cunt]
+		cunt = cunt - 1
+		wait(math.random(3,6)/10)
+		spawn(function()
+		fade(v)
+		end)
+		game.Debris:AddItem(v, 0)
+	until cunt == 0
+	end
+
+sound(3264923, 0, math.random(12,16)/10, Effects, true, 0, false)
+
+function fade(b)
+	local bc
+	if b:IsA("WedgePart") then
+		bc = Instance.new("WedgePart",Effects)
+	elseif b:IsA("BasePart") and not(b:IsA("UnionOperation")) and not(b:IsA("TrussPart")) and not(b:IsA("MeshPart")) and not(b:IsA("WedgePart")) and not(b:IsA("CornerWedgePart")) then
+		bc = Instance.new("Part",Effects)
+		bc.Shape = b.Shape
+		elseif b:IsA("UnionOperation") or b:IsA("MeshPart") then
+		bc = b:Clone()
+		bc.Parent = Effects
+		elseif b:IsA("CornerWedgePart") then
+		bc = Instance.new("CornerWedgePart",Effects)
+		elseif b:IsA("TrussPart") then
+		bc = Instance.new("TrussPart",Effects)
+	--[[elseif b:IsA("MeshPart") then
+		bc = Instance.new("MeshPart",Effects)
+		bc.MeshId = b.MeshId
+		bc.TextureID = b.TextureID]]
+	end
+	for i,s in pairs(b:GetChildren()) do
+		if s:IsA("SpecialMesh") or s:IsA("BlockMesh") or s:IsA("FileMesh") then
+			s.Parent = bc
+		end
+	end
+	bc.Size = b.Size
+	bc.Anchored = false
+	bc.CanCollide = false
+	local bcc = Instance.new("BodyAngularVelocity",bc)
+	bcc.AngularVelocity = Vector3.new(2, 2, 2)
+	bcc.MaxTorque  = Vector3.new(9e9, 9e9, 9e9)
+	bc.CFrame = b.CFrame
+	bc.Material = "Plastic"
+	local bcac = Instance.new("BodyPosition",bc)
+	bcac.P = bcac.P / 10
+	bcac.MaxForce  = Vector3.new(9e9, 9e9, 9e9)
+	bcac.Position = bc.Position + Vector3.new(0, 13, 0)
+	noo(bc)
+	bc.BrickColor = cols[math.random(1,#cols)]
+	local s = sound(3264923, 1, math.random(12,16)/10, bc, true, 0, false)
+	s.EmitterSize = 40
+	spawn(function()
+		for i = 1,100 do
+			swait()
+			bc.Transparency = bc.Transparency + 1/100
+		end
+		game.Debris:AddItem(bc,0)
+	end)
+end
+
+local gf = Instance.new("Folder",script)
+gf.Name = "FaceGradientFolder"
+
+--plr:ClearCharacterAppearance()
+for i,v in pairs(char:children()) do
+	if v:IsA("CharacterMesh") then
+		v:Destroy()
+		elseif v:IsA("BodyColors") then
+		v:Destroy()
+		elseif v:IsA("Shirt") then
+		v:Destroy()
+		elseif v:IsA("Pants") then
+		v:Destroy()
+		elseif v:IsA("ShirtGraphic") then
+		v:Destroy()
+	end
+end
+Head.face.Texture = ""
+
+local bc = Instance.new("BodyColors",char)
+bc.HeadColor3 = Color3.new(0,0,0)
+--[[bc.TorsoColor3 = Color3.new(0,0,0)
+bc.RightArmColor3 = Color3.new(0,0,0)
+bc.LeftLegColor3 = Color3.new(0,0,0)
+bc.LeftArmColor3 = Color3.new(0,0,0)
+bc.RightLegColor3 = Color3.new(0,0,0)]]
+function bricky(prt)
+	local pa = Instance.new("Part",prt)
+	pa.Size = prt.Size + Vector3.new(0.02,0.02,0.02)
+	noo(pa)
+	pa.CanCollide = false
+	pa.Anchored = false
+	pa.Material = "Neon"
+	pa.BrickColor = BrickColor.new("Really black")
+	pa.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+	local wa = Instance.new("Weld",prt)
+	wa.Part0 = prt
+	wa.Part1 = pa
+end
+
+bricky(Torso)
+bricky(RightArm)
+bricky(LeftArm)
+bricky(RightLeg)
+bricky(LeftLeg)
+
+local Gui = script.Abilities
+Gui.Parent = plr.PlayerGui
+
+function SortGui(a1,a2,a3,a4)
+	if a1 == "none" then
+		Gui.Frame.Ability1.Visible = false
+	else
+		Gui.Frame.Ability1.Visible = true
+		Gui.Frame.Ability1.Text = a1
+	end
+	
+	if a2 == "none" then
+		Gui.Frame.Ability2.Visible = false
+	else
+		Gui.Frame.Ability2.Visible = true
+		Gui.Frame.Ability2.Text = a2
+	end
+	
+	if a3 == "none" then
+		Gui.Frame.Ability3.Visible = false
+	else
+		Gui.Frame.Ability3.Visible = true
+		Gui.Frame.Ability3.Text = a3
+	end
+	
+	if a4 == "none" then
+		Gui.Frame.Ability4.Visible = false
+	else
+		Gui.Frame.Ability4.Visible = true
+		Gui.Frame.Ability4.Text = a4
+	end
+end
+
+SortGui("E - Sink","Click - Punch","Q - Grab Limb(limited range)", "none")
+
+local sinked = false
+
+function sink()
+	attack = true
+	if sinked == false then
+	sinked = true
+	Humanoid.WalkSpeed = 0
+	spd=40
+	local toc = RootPart.CFrame
+	local cy = Instance.new("Part",Effects)
+	cy.Size = Vector3.new(0.3,0.2,0.2)
+	cy.CanCollide = false
+	cy.Anchored = true
+	cy.BrickColor = BrickColor.new("Really black")
+	cy.Orientation = Vector3.new(0, 0, 90)
+	local HIT,POS = CastProperRay(RootPart.Position, RootPart.Position - Vector3.new(0, 100, 0), 1000, char)
+	cy.Position = POS
+	cy.Transparency = 1
+	noo(cy)
+	cy.Material = "Neon"
+	cy.Shape = "Cylinder"
+	RootPart.Anchored = true
+	RootPart.CFrame = toc
+	local aaa = RootPart.Position.Y - POS.Y
+	for i = 1,50 do
+		swait()
+		cy.Transparency = cy.Transparency - 1/25
+		cy.Size = cy.Size + Vector3.new(0,6/50,6/50)
+		PlayAnimationFromTable({
+CFrame.new(0, -0 + 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(Rad(0), 0, Rad(150-70*math.cos(tick()*30/4))) * RightShoulderC0,
+CFrame.new(-1.5, 0.5 - 0.15 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	
+	for i = 1,100 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, -i/20*aaa + 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(Rad(0), 0, Rad(150-70*math.cos(tick()*30/4))) * RightShoulderC0,
+CFrame.new(-1.5, 0.5 - 0.15 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	SortGui("E - Back On Surface","R - Realistic Back On Surface","Q - Eat Person", "F - Hungry Hole")
+	cy.Parent = workspace
+	else
+		
+		sinked = false
+	Humanoid.WalkSpeed = 0
+	spd=12
+	local toc = RootPart.CFrame
+	local cy = Instance.new("Part",Effects)
+	cy.Size = Vector3.new(0.3,0.2,0.2)
+	cy.CanCollide = false
+	cy.Anchored = true
+	cy.BrickColor = BrickColor.new("Really black")
+	cy.Orientation = Vector3.new(0, 0, 90)
+	local HIT,POS = CastProperRay(RootPart.Position, RootPart.Position - Vector3.new(0, 100, 0), 1000, char)
+	cy.Position = POS
+	cy.Transparency = 1
+	noo(cy)
+	cy.Material = "Neon"
+	cy.Shape = "Cylinder"
+	RootPart.Anchored = true
+	RootPart.CFrame = toc
+	local aaa = RootPart.Position.Y - POS.Y
+	RootJoint.C0 = CFrame.new(0, (-120/20*aaa), 0)
+	for i = 1,20 do
+		swait()
+		cy.Transparency = cy.Transparency - 1/10
+		cy.Size = cy.Size + Vector3.new(0,6/20,6/20)
+	end
+	
+	for i = 1,140 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) +i/20*aaa + 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(70), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(Rad(-70), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * angles(Rad(-70), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(-40), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(-40), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	cy.Parent = workspace
+		SortGui("E - Sink","Click - Punch","Q - Grab Limb(limited range)", "none")
+	end
+	attack = false
+end
+
+
+function unsink()
+	attack = true
+		sinked = false
+	Humanoid.WalkSpeed = 0
+	spd=12
+	local toc = RootPart.CFrame
+	local cy = Instance.new("Part",Effects)
+	cy.Size = Vector3.new(0.3,0.2,0.2)
+	cy.CanCollide = false
+	cy.Anchored = true
+	cy.BrickColor = BrickColor.new("Really black")
+	cy.Orientation = Vector3.new(0, 0, 90)
+	local HIT,POS = CastProperRay(RootPart.Position, RootPart.Position - Vector3.new(0, 100, 0), 1000, char)
+	cy.Position = POS
+	cy.Transparency = 1
+	noo(cy)
+	cy.Material = "Neon"
+	cy.Shape = "Cylinder"
+	RootPart.Anchored = true
+	RootPart.CFrame = toc
+	local aaa = RootPart.Position.Y - POS.Y
+	RootJoint.C0 = CFrame.new(0, (-120/20*aaa), 0)
+	for i = 1,20 do
+		swait()
+		cy.Transparency = cy.Transparency - 1/10
+		cy.Size = cy.Size + Vector3.new(0,6/20,6/20)
+	end
+	
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1.5) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0.2) * angles(Rad(0), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0.2) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1.5) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5+(120/22*aaa), 0.2) * angles(Rad(150), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0.2) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1.5) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5+(120/24*aaa), -0.5) * angles(Rad(90), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5+(120/22*aaa), 0.2) * angles(Rad(150), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1.5) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5+(120/24*aaa), -0.5) * angles(Rad(90), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5+(120/24*aaa), -0.5) * angles(Rad(90), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/138*aaa) + 0.1 * math.cos(tick()*30 / 10), -1.5) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5-0.1*aaa, -0.5) * angles(Rad(90), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5-0.1*aaa, -0.5) * angles(Rad(90), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	
+	local s = sound(177359995, 3, 1,Head,true,0,false)
+	s.EmitterSize = 40
+	repeat
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/138*aaa) + 0.1 * math.cos(tick()*30 / 10), -1.5) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0.2 - 0.3 * math.cos(tick()*30/2), -0.15) * angles(Rad(20), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5-0.1*aaa, -0.5) * angles(Rad(90), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5-0.1*aaa, -0.5) * angles(Rad(90), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	until s.Playing == false
+	
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, -1.7 + 0.1 * math.cos(tick()*30 / 10), -1.5) * angles(Rad(-90), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.4, -0.5) * angles(Rad(130), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.4, -0.5) * angles(Rad(130), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(40), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(40), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, 0 + 0.1 * math.cos(tick()*30 / 10), -0.5) * angles(Rad(00), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(Rad(0), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5,0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -0.7 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(90-90), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.1 * math.cos(tick()*30 / 10), 0) * angles(Rad(40-90), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end	
+	cy.Parent = workspace
+		SortGui("E - Sink","Click - Punch","Q - Grab Limb(limited range)", "none")
+	attack = false
+end
+
+sound(177359995, 0, 100,Effects,true,0,false)
+sound(566988981, 0, 100,Effects,true,0,false)
+sound(264486467, 0, 100,Effects,true,0,false)
+sound(147758746, 0, 100,Effects,true,0,false)
+sound(2767085, 0, 100,Effects,true,0,false)
+local qhold = false
+
+function eatperson()
+	attack = true
+	qhold = true
+	Humanoid.WalkSpeed = 0
+	local toc = RootPart.CFrame
+	local cy = Instance.new("Part",Effects)
+	cy.Size = Vector3.new(0.3,0.2,0.2)
+	cy.CanCollide = false
+	cy.Anchored = true
+	cy.BrickColor = BrickColor.new("Really black")
+	cy.Orientation = Vector3.new(0, 0, 90)
+	local HIT,POS = CastProperRay(RootPart.Position, RootPart.Position - Vector3.new(0, 100, 0), 1000, char)
+	cy.Position = POS
+	cy.Transparency = 1
+	noo(cy)
+	cy.Material = "Neon"
+	cy.Shape = "Cylinder"
+	RootPart.Anchored = true
+	RootPart.CFrame = toc
+	local aaa = RootPart.Position.Y - POS.Y
+	RootJoint.C0 = CFrame.new(0, (-120/20*aaa), 0)
+	for i = 1,5 do
+		swait()
+		cy.Transparency = cy.Transparency - 1/5
+		cy.Size = cy.Size + Vector3.new(0,6/5,6/5)
+	end
+	for i = 1,30/7 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0.2) * angles(Rad(0), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0.2) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1*7, false)
+	end
+	for i = 1,30/7 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa), -1) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.6+(120/24*aaa), -0.5) * angles(Rad(170), Rad(180), Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.6+(120/24*aaa), -0.5) * angles(Rad(170), Rad(180), 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1*7, false)
+	end
+	local found = nil
+	SortGui("Q - Sink Back","none","none", "none")
+	local hec = 0
+	repeat
+		swait()
+		if hec >= 7 then
+		else
+			hec = hec+1
+		end
+		for i,v in pairs(workspace:GetDescendants()) do
+		if v.Parent:FindFirstChildOfClass("Humanoid") ~= nil and v:IsA("BasePart") then
+			
+			local hum = v.Parent:FindFirstChildOfClass("Humanoid")
+			local targ = v.Position - LeftArm.Position
+local mag = targ.magnitude
+if hec >= mag and v.Parent ~= char and found == nil and v.Parent:FindFirstChild("Head") ~= nil then
+	found  = v.Parent
+end
+		end
+		end
+		
+		
+	until found ~= nil or qhold == false
+	if found == nil then
+	for i = 1,30 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0.2) * angles(Rad(0), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0.2) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+	else
+		local sos = math.random(1,2)
+		local s11
+		if sos == 1 then
+		s11 = sound(566988981, 3, 1,found:FindFirstChild("Head"),true,0,false)
+		s11.EmitterSize = 10
+		elseif sos == 2 then
+			s11 = sound(147758746, 3, 1,found:FindFirstChild("Head"),true,0,false)
+		s11.EmitterSize = 10
+			end
+		local hed = found:FindFirstChild("Head")
+		local hum = found:FindFirstChildOfClass("Humanoid")
+		spawn(function()
+		repeat
+			wait()
+		hed.Anchored = true
+		hed.CFrame = RightArm.CFrame*CFrame.new(0,-(1+hed.Size.Z/2),0) * ANGLES(Rad(-90), Rad(0), Rad(0))
+		until found.Parent == nil
+		end)
+		local cc = script.Camera:Clone()
+		cc.Parent = hum
+		cc.Disabled = false
+		for i = 1,70/2 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0.2) * angles(Rad(0), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0.2) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+		}, .01, false)
+		end
+		spawn(function()
+			for i = 1,70/2 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, (-120/20*aaa) + 0.3 * math.cos(tick()*30 / 10), -1) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0.2) * angles(Rad(0), 0, Rad(0)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0.2) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+		}, .01, false)
+		end
+		end)
+		local s22 = sound(177359995, 3, 1,Head,true,0,false)
+	s.EmitterSize = 40
+	wait(1)
+	Humanoid.Health = Humanoid.Health + 550
+		local s = sound(264486467, 3, 1,cy,true,0,false)
+		s.EmitterSize = 20
+		game.Debris:AddItem(found,0.2)
+		spawn(function()
+	for i = 1,15 do
+		wait(math.random(9,15)/10)	
+local bo = Instance.new("Part",cy)
+bo.Size = Vector3.new(.2,.6,1)
+bo.BrickColor = BrickColor.new("White")
+bo.CFrame = cy.CFrame*CFrame.Angles(math.random(-50,50),math.random(-50,50),math.random(-50,50))*CFrame.new(0,0.2,0)
+bo.Velocity = Vector3.new(math.random(-10,10),50,math.random(-10,10))
+local m = Instance.new("SpecialMesh",bo)
+m.MeshId = "rbxassetid://305829157"
+m.Scale = Vector3.new(math.random(9,13)/10,math.random(9,13)/10,math.random(9,13)/10)
+
+spawn(function()
+swait(3000)
+for a=0,1,.05 do
+swait()
+bo.Transparency = a
+end
+bo:Destroy()
+end)
+end
+
+wait(math.random(9,15)/10)
+local bo = Instance.new("Part",cy)
+bo.Size = Vector3.new(1,1,1)
+bo.BrickColor = BrickColor.new("White")
+bo.CFrame = cy.CFrame*CFrame.Angles(math.random(-50,50),math.random(-50,50),math.random(-50,50))*CFrame.new(0,0.2,0)
+bo.Velocity = Vector3.new(math.random(-10,10),50,math.random(-10,10))
+local m = Instance.new("SpecialMesh",bo)
+m.MeshId = "rbxassetid://4770583"
+m.Scale = Vector3.new(3,3,3)
+
+spawn(function()
+swait(3000)
+for a=0,1,.05 do
+swait()
+bo.Transparency = a
+end
+bo:Destroy()
+end)
+end)
+		wait(0.1)
+		s11.Parent = cy
+		s22.Parent = cy
+		wait(0.1)
+	end
+	cy.Parent = workspace
+	SortGui("E - Back On Surface","R - Realistic Back On Surface","Q - Eat Person", "F - Hungry Hole")
+	attack = false
+end
+
+local grl = nil
+local grabbed = false
+
+function clonee(t)
+	t.Archivable = true 
+local tt = t:Clone() 
+tt.Parent = workspace
+tt:MoveTo(t:GetModelCFrame().p)
+tt:MakeJoints()
+t.Archivable = false 
+game.Debris:AddItem(t,0)
+local hh = tt:FindFirstChildOfClass("Humanoid")
+if hh ~= nil then
+	hh.PlatformStand = true
+	hh.MaxHealth = 0
+end
+	return tt
+end
+
+function grablimb(pa)
+			local targ = pa.Position - LeftArm.Position
+local mag = targ.magnitude
+if 10 >= mag and pa.Parent ~= char and (grl == nil or grl.Parent == nil) and (pa.Parent:FindFirstChildOfClass("Humanoid") ~= nil or pa.Parent.Parent:FindFirstChildOfClass("Humanoid") ~= nil) then
+	pa.Parent:FindFirstChildOfClass("Humanoid").BreakJointsOnDeath = false
+	grl = pa:Clone()
+	grabbed = true
+	pa:Destroy()
+	grl.Parent = Effects
+	grl.Size = Vector3.new(grl.Size.X/1.5,grl.Size.Y/1.5,grl.Size.Z/1.5)
+	local grwl = Instance.new("Weld",grl)
+	grwl.Part0 = RightArm
+	grwl.Part1 = grl
+	grwl.C0 = CFrame.new(0,-1, 0) * angles(Rad(-90),0,0)
+	SortGui("Q - Eat Limb", "none", "none", "none")
+end
+end
+
+
+function eatlimb()
+	attack = true
+	grabbed = false
+	Humanoid.WalkSpeed = 0
+	for i = 1,20 do
+		swait()
+		PlayAnimationFromTable({
+CFrame.new(0, -0 + 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, -0.3) * angles(Rad(75.89), Rad(134.56), Rad(74.56)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5 - 0.15 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.3 * math.cos(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .3, false)
+	end
+	local s = sound(264486467, 3, 1,Head,true,0,false)
+		s.EmitterSize = 20
+		Humanoid.Health = Humanoid.Health + 200
+		local bo = Instance.new("Part",Effects)
+		if grl.Name == "Head" then
+		bo.Size = Vector3.new(1,1,1)
+		else
+			bo.Size = Vector3.new(.2,.6,1)
+		end
+bo.BrickColor = BrickColor.new("Persimmon")
+bo.CFrame = grl.CFrame
+grl:Destroy()
+if grl.Name == "Head" then
+		local m = Instance.new("SpecialMesh",bo)
+m.MeshId = "rbxassetid://4770583"
+m.Scale = Vector3.new(3/1.5,3/1.5,3/1.5)
+		else
+			local m = Instance.new("SpecialMesh",bo)
+m.MeshId = "rbxassetid://305829157"
+m.Scale = Vector3.new(math.random(9,13)/10*1.2,math.random(9,13)/10*1.2,math.random(9,13)/10*1.2)
+		end
+		SortGui("E - Sink","Click - Punch","Q - Grab Limb(limited range)", "none")
+	attack = false
+end
+
+function HGH()
+	local cy = Instance.new("Part",workspace.Terrain)
+	cy.Size = Vector3.new(0.3,0.2,0.2)
+	cy.CanCollide = false
+	cy.Anchored = true
+	cy.BrickColor = BrickColor.new("Really black")
+	cy.Orientation = Vector3.new(0, 0, 90)
+	local HIT,POS = CastProperRay(RootPart.Position, RootPart.Position - Vector3.new(0, 100, 0), 1000, char)
+	cy.Position = POS
+	cy.Transparency = 1
+	noo(cy)
+	cy.Material = "Neon"
+	cy.Shape = "Cylinder"
+	local aaa = RootPart.Position.Y - POS.Y
+	spawn(function()
+		local totalfood = 0
+		local food = 150
+		local waiting = 1
+		spawn(function()
+			while wait() do
+				
+				for i,v in pairs(workspace:GetDescendants()) do
+		if v ~= nil and v.Parent ~= nil and v:IsA("BasePart") then
+			
+			local targ = v.Position - cy.Position
+local mag = targ.magnitude
+if cy.Size.Y/2.2 >= mag and v ~= workspace.Terrain and v.Name ~= "Base" and v.Name ~= "Baseplate" and v.Name ~= "BasePlate" and v ~= cy and v.Parent ~= char and not(v:IsDescendantOf(char)) and not(v.Size.X == cy.Size.X) then
+	food = food + 5
+	totalfood = totalfood + 5
+	local s = sound(264486467, 3, 1,cy,true,0,false)
+		s.EmitterSize = 20
+	local bo = Instance.new("Part",Effects)
+		if v.Name == "Head" then
+		bo.Size = Vector3.new(1,1,1)
+		else
+			bo.Size = Vector3.new(.2,.6,1)
+		end
+bo.BrickColor = BrickColor.new("Persimmon")
+bo.CFrame = v.CFrame
+v:Destroy()
+if v.Name == "Head" then
+		local m = Instance.new("SpecialMesh",bo)
+m.MeshId = "rbxassetid://4770583"
+m.Scale = Vector3.new(3/1.5,3/1.5,3/1.5)
+		else
+			local m = Instance.new("SpecialMesh",bo)
+m.MeshId = "rbxassetid://305829157"
+m.Scale = Vector3.new(math.random(9,13)/10*1.2,math.random(9,13)/10*1.2,math.random(9,13)/10*1.2)
+		end
+	
+end
+		end
+				end
+				
+				
+			end
+		end)
+		local foodneeded = 120
+		local allow = true
+		spawn(function()
+			local function feedme()
+				if totalfood >= 200 then
+					for i = 1,200 do
+		swait()
+		cy.Transparency = cy.Transparency + 1/100
+		cy.Size = cy.Size - Vector3.new(0,6/200,6/200)
+					end
+					cy:Destroy()
+					foodneeded = -100000
+					allow = false
+				end
+			repeat
+				swait()
+				food = food - 0.5
+			until food <= 0
+			waiting = 1
+			repeat
+				swait()
+				waiting = waiting + 0.001
+				cy.Size = cy.Size + Vector3.new(0,0.1*waiting,0.1*waiting)
+			until food >= foodneeded - 1
+			for i = 1,cy.Size.Y do
+				swait()
+				cy.Size = cy.Size - Vector3.new(0,cy.Size.Y/2-6.2/cy.Size.Y,cy.Size.Y/2-6.2/cy.Size.Y)
+			end
+			feedme()
+			end
+			feedme()
+		end)
+	for i = 1,20 do
+		swait()
+		cy.Transparency = cy.Transparency - 1/10
+		cy.Size = cy.Size + Vector3.new(0,6/20,6/20)
+	end
+	while wait() and allow == true do
+		for i = 1,10 do
+			swait()
+			cy.Size = cy.Size + Vector3.new(0,1/20,1/20)
+		end
+		for i = 1,10 do
+			swait()
+			cy.Size = cy.Size - Vector3.new(0,1/20,1/20)
+		end
+	end
+	end)
+	end
+
+--//=================================\\--
+--||          Mouse functions        ||--
+--\\=================================//-- 
+	
+	Mouse.Button1Down:Connect(function()
+		if attack == false and sinked == false and grabbed == false then
+		punch()
+		end
+	end)
+	
+Mouse.KeyDown:connect(function(k)
+k = k:lower()
+if k=='e' and attack == false and grabbed == false then
+sink()
+elseif k=='r' and attack == false and sinked == true and grabbed == false then
+unsink()
+elseif k=='q' and attack == false and sinked == true and grabbed == false then
+eatperson()
+elseif k=='f' and attack == false and sinked == true and grabbed == false then
+spawn(function()
+HGH()
+end)
+elseif k=='q' and attack == true and sinked == true and grabbed == false then
+	qhold = false
+	elseif k=='q' and attack == false and sinked == false and Mouse.Target ~= nil and grabbed == false then
+	grablimb(Mouse.Target)
+	elseif k=='q' and attack == false and sinked == false and Mouse.Target ~= nil and grabbed == true then
+	eatlimb()
+	elseif k=='m' then
+	plr:ClearCharacterAppearance()
+	bc = Instance.new("BodyColors",char)
+bc.HeadColor3 = Color3.new(0,0,0)
+elseif k=='n' then
+	Humanoid.Health = 0.1
+end
+end)
+
+--//=================================\\--
+--||     Wrap the whole script up    ||--
+--\\=================================//-- 
+
+function ServerEvent(a,b,c)
+	if b == "Loudness" then
+		SickLoud = c
+	end
+end
+
+while game:GetService("RunService").Heartbeat:Wait() and stopped == false do
+if Neck.Parent ~= nil then
+	local absvel = RootPart.CFrame:vectorToObjectSpace(RootPart.Velocity)
+Torsovelocity = (RootPart.Velocity * Vector3.new(1, 0, 1)).magnitude
+velocity = RootPart.Velocity.y
+local hit, pos = rayCast(RootPart.Position, (CFrame.new(RootPart.Position, RootPart.Position - Vector3.new(0, 1, 0))).lookVector, 4, chara)
+
+spawn(function()
+	Point = Mouse.Hit.p
+					Dist = (Head.CFrame.p-Point).magnitude
+					Diff = Head.CFrame.Y-Point.Y
+
+look = CFrame.new(0, 0, (math.atan(Diff/Dist)*0.6) / 1.2) * angles(-(math.atan(Diff/Dist)*0.6), (((Head.CFrame.p-Point).Unit):Cross(Torso.CFrame.lookVector)).Y*1, 0)
+end)
+char.Parent = np
+if attack == false then
+	Humanoid.MaxHealth = maxhealth
+	Humanoid.WalkSpeed = spd
+	Humanoid.PlatformStand = false
+	un_anchor(char)
+end
+
+if grl == nil or grl.Parent == nil then
+	if grabbed == true then
+		grabbed = false
+		SortGui("E - Sink","Click - Punch","Q - Grab Limb(limited range)", "none")
+	end
+end
+
+local sidevec = math.clamp((RootPart.Velocity*RootPart.CFrame.rightVector).X+(RootPart.Velocity*RootPart.CFrame.rightVector).Z,-Humanoid.WalkSpeed,Humanoid.WalkSpeed)
+	local forwardvec =  math.clamp((RootPart.Velocity*RootPart.CFrame.lookVector).X+(RootPart.Velocity*RootPart.CFrame.lookVector).Z,-Humanoid.WalkSpeed,Humanoid.WalkSpeed)
+	local sidevelocity = sidevec/Humanoid.WalkSpeed
+	local forwardvelocity = forwardvec/Humanoid.WalkSpeed
+
+if RootPart.Velocity.y > 1 and hit == nil then 
+Anim = "Jump"
+if attack == false and sinked == false then
+PlayAnimationFromTable({
+CFrame.new(0, -0, 0) * angles(Rad(20), 0, 0) * RootJointC0,
+CFrame.new(0, 0, -0) * angles(Rad(20), 0, 0) * NeckC0,
+CFrame.new(1.5, 0.5, -0) * angles(Rad(30), Rad(0), Rad(30)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * angles(Rad(30), 0, Rad(-30)) * LeftShoulderC0,
+CFrame.new(1, -0.5, -0.5) * RightHipC0,
+CFrame.new(-1, -1, 0) * LeftHipC0,
+	}, .1, false)
+end
+elseif RootPart.Velocity.y < -1 and hit == nil then 
+Anim = "Fall"
+if attack == false and sinked == false then
+PlayAnimationFromTable({
+CFrame.new(0, -0, 0) * angles(Rad(-20), 0, 0) * RootJointC0,
+CFrame.new(0, 0, -0) * angles(Rad(-20), 0, 0) * NeckC0,
+CFrame.new(1.5, 0.5, -0) * angles(Rad(30), Rad(0), Rad(30)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * angles(Rad(30), 0, Rad(-30)) * LeftShoulderC0,
+CFrame.new(1, -0.5, -0.5) * RightHipC0,
+CFrame.new(-1, -1, 0) * LeftHipC0,
+	}, .1, false)
+end
+elseif Torsovelocity < 1 and hit ~= nil then
+Anim = "Idle"
+if attack == false and sinked == false and grabbed == false then
+	PlayAnimationFromTable({
+CFrame.new(0, -0 + 0.1 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, Rad(0 - 5 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16))))) * RootJointC0,
+CFrame.new(-0, 0, 0) * look * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5 - 0.15 * math.sin(tick()*30 / 10), -0) * angles(Rad(0), 0, Rad(0)) * angles(0, 0, 0) * RightShoulderC0,
+CFrame.new(-1.5, 0.5 - 0.15 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.1 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, Rad(0 + 5 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16))))) * RightHipC0,
+CFrame.new(-1, -1 - 0.1 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, Rad(0 + 5 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16))))) * LeftHipC0,
+	}, .1, false)
+	elseif attack == false and sinked == true and grabbed == false then
+change = 1
+RootJoint.C0 = CFrame.new(0, 100000, 0) * angles(Rad(0), 0, 0) * RootJointC0
+	PlayAnimationFromTable({
+RootJoint.C0,
+CFrame.new(-0, 0, 0),
+CFrame.new(0, 0, 0),
+CFrame.new(0, 0, 0),
+CFrame.new(0, 0, 0),
+CFrame.new(0, 0, 0),
+	}, .1, false)
+	elseif attack == false and sinked == false and grabbed == true then
+	PlayAnimationFromTable({
+CFrame.new(0, -0 + 0.1 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RootJointC0,
+CFrame.new(-0, 0, 0) * look * angles(Rad(0), 0, Rad(0)) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(Rad(90), 0, 0) * RightShoulderC0,
+CFrame.new(-1.5, 0.5 - 0.15 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * angles(0, 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1 - 0.1 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * RightHipC0,
+CFrame.new(-1, -1 - 0.1 * math.sin(tick()*30 / 10), 0) * angles(Rad(0), 0, 0) * LeftHipC0,
+	}, .1, false)
+	end
+
+elseif Torsovelocity > 2 and hit ~= nil then
+Anim = "Walk"
+if attack == false and sinked == false and grabbed == false then
+	PlayAnimationFromTable({
+CFrame.new(0, math.sin(tick()*30/(4/(Humanoid.WalkSpeed/16)))/2.5, 0) * CFrame.new(0, -0.07, 0) * angles(absvel.z/60, Rad(0 + 10 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16)))), -absvel.x/60) * RootJointC0,
+CFrame.new(0 - 0.2 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16))), 0, -0) * look * angles(0,sidevelocity*0.5,0) * angles(0,Rad(0 - 10 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16)))) + RootPart.RotVelocity.Y / 24, Rad(0 - 20 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16))))) * NeckC0,
+CFrame.new(1.5, 0.5, -0) * CFrame.Angles(math.rad(0 + (70 - sidevelocity * 35) * math.sin((tick()*30) / (8 / (Humanoid.WalkSpeed / 16)))), 0, Rad(10)) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * CFrame.Angles(math.rad(0 - (70 + sidevelocity * 35) * math.sin((tick()*30) / (8 / (Humanoid.WalkSpeed / 16)))), 0, Rad(-10)) * LeftShoulderC0,
+CFrame.new(1, -1-math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/3.5,(-0.1)+ math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/2.5) * CFrame.new(0, 0 + 0.225 * math.sin(tick()*30 / (8 / (Humanoid.WalkSpeed / 16))), 0) * angles(Rad(2), 0, 0) * CFrame.Angles((absvel.z/10)*math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16))), 0, (-absvel.x/20)*math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16)))) * RightHipC0,
+CFrame.new(-1, -1+math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/3.5,(-0.1)+ -math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/2.5) * CFrame.new(0, 0 - 0.225 * math.sin(tick()*30 / (8 / (Humanoid.WalkSpeed / 16))), 0) * angles(Rad(-2), 0, 0) * CFrame.Angles((absvel.z/10)*-math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16))), 0, (-absvel.x/20)*-math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16)))) * LeftHipC0,
+	}, .1 * (Humanoid.WalkSpeed / 16), false)
+	elseif attack == false and sinked == true and grabbed == false then
+change = 1
+RootJoint.C0 = CFrame.new(0, 100000, 0) * angles(Rad(0), 0, 0) * RootJointC0
+	PlayAnimationFromTable({
+RootJoint.C0,
+CFrame.new(-0, 0, 0),
+CFrame.new(0, 0, 0),
+CFrame.new(0, 0, 0),
+CFrame.new(0, 0, 0),
+CFrame.new(0, 0, 0),
+	}, .1, false)
+	elseif attack == false and sinked == false and grabbed == true then
+	PlayAnimationFromTable({
+CFrame.new(0, math.sin(tick()*30/(4/(Humanoid.WalkSpeed/16)))/2.5, 0) * CFrame.new(0, -0.07, 0) * angles(absvel.z/60, Rad(0 + 10 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16)))), -absvel.x/60) * RootJointC0,
+CFrame.new(0 - 0.2 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16))), 0, -0) * look * angles(0,sidevelocity*0.5,0) * angles(0,Rad(0 - 10 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16)))) + RootPart.RotVelocity.Y / 24, Rad(0 - 20 * math.cos(tick()*30/(16 / (Humanoid.WalkSpeed / 16))))) * NeckC0,
+CFrame.new(1.5, 0.5, 0) * angles(Rad(90), 0, 0) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * CFrame.Angles(math.rad(0 - (70 + sidevelocity * 35) * math.sin((tick()*30) / (8 / (Humanoid.WalkSpeed / 16)))), 0, Rad(-10)) * LeftShoulderC0,
+CFrame.new(1, -1-math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/3.5,(-0.1)+ math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/2.5) * CFrame.new(0, 0 + 0.225 * math.sin(tick()*30 / (8 / (Humanoid.WalkSpeed / 16))), 0) * angles(Rad(2), 0, 0) * CFrame.Angles((absvel.z/10)*math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16))), 0, (-absvel.x/20)*math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16)))) * RightHipC0,
+CFrame.new(-1, -1+math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/3.5,(-0.1)+ -math.cos(tick()*30/(8/(Humanoid.WalkSpeed/16)))/2.5) * CFrame.new(0, 0 - 0.225 * math.sin(tick()*30 / (8 / (Humanoid.WalkSpeed / 16))), 0) * angles(Rad(-2), 0, 0) * CFrame.Angles((absvel.z/10)*-math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16))), 0, (-absvel.x/20)*-math.sin(tick()*30/(8 / (Humanoid.WalkSpeed / 16)))) * LeftHipC0,
+	}, .1 * (Humanoid.WalkSpeed / 16), false)
+end
+end
+end
+
+spawn(function()
+
+if mus.Parent == Torso then
+mus.SoundId = "rbxassetid://"..SongId
+mus.Pitch = PIT
+mus.Playing = true
+mus.Looped = true
+mus.EmitterSize = 50
+        timepos = mus.TimePosition
+        mus.Volume = VOL * volumemultiply
+    else
+        mus = Instance.new("Sound", Torso)
+        mus.TimePosition = timepos
+end
+
+if dancing == true and attack == true then
+	ls = ""
+	PlayAnimationFromTable({
+CFrame.new(0, -0, 0) * angles(0, 0, Rad(0 + 10 * math.cos(tick()*30 / (50 / 2 / 4)))) * CFrame.new(0, 0 + 0.3 * math.sin((tick()*30) / (50 / 2 / 4)), 0) * RootJointC0,
+CFrame.new(0, 0, -0) * look * NeckC0,
+CFrame.new(1.5, 0.5, -0) * angles(Rad(90 + 45 * math.cos(tick()*30 / (50 / 2 / (4)))), 0, 0) * RightShoulderC0,
+CFrame.new(-1.5, 0.5, 0) * angles(Rad(90 - 45 * math.cos(tick()*30 / (50 / 2 / (4)))), 0, 0) * LeftShoulderC0,
+CFrame.new(1, -1, 0)  * angles(0, 0, Rad(0 - 10 * math.cos(tick()*30 / (50 / 2 / (4))))) * CFrame.new(0, 0 - 0.3 * math.sin((tick()*30) / (50 / 2 / 4)), 0) * angles(0, 0, Rad(5)) * CFrame.new(0, 0 - 0.1 * math.sin((tick()*30) / (40 / 4)), 0) * RightHipC0,
+CFrame.new(-1, -1, 0) * angles(0, 0, Rad(0 - 10 * math.cos(tick()*30 / (50 / 2 / (4))))) * CFrame.new(0, 0 - 0.3 * math.sin((tick()*30) / (50 / 2 / 4)), 0) * angles(0, 0, Rad(-5)) * CFrame.new(0, 0 - 0.1 * math.sin((tick()*30) / (40 / 4)), 0) * LeftHipC0,
+	}, .1, false)
+end
+
+if (Remote.Parent ~= mus and mus.Parent == Torso) or (Remote.Parent == mus and mus.Parent == Torso and (Remote:FindFirstChild("SickControl") == nil or Remote:FindFirstChild("SickControl").Disabled == true )) then
+		if Remote.Parent ~= nil then
+			Remote:Destroy()
+		end
+		Remote = RemoteBackup:Clone()
+		Remote.Parent = mus
+		Remote.SickControl.Disabled = false
+		Remote.OnServerEvent:Connect(ServerEvent)
+	end
+
+if breathe.Parent == RootPart then
+breathe.SoundId = "rbxassetid://177339878"
+breathe.Looped = true
+breathe.EmitterSize = 2
+breathe.Playing = true
+        btimepos = breathe.TimePosition
+        breathe.Volume = 1
+    else
+        breathe = Instance.new("Sound", RootPart)
+        breathe.TimePosition = btimepos
+end
+end)
+end
+
+for i = 1,13*5 do
+	wait()
+	script.Parent.CameraOffset = Vector3.new(-i/5, -2, 0.5)
+end
+
+while wait(0.1) do
+	script.Parent.CameraOffset = Vector3.new(-13, -2, 0.5)
+end
+
+local KeyDownEvent=Instance.new'BindableEvent'
+local KeyUpEvent=Instance.new'BindableEvent'
+local UISBegan=Instance.new'BindableEvent'
+local UISEnded=Instance.new'BindableEvent'
+local abc = {}
+script.KD.OnServerEvent:Connect(function(okay,woah)
+	KeyDownEvent:Fire(woah)
+end)
+script.KU.OnServerEvent:Connect(function(okay,woah)
+	KeyUpEvent:Fire(woah)
+end)
+script.UIS_Ended.OnServerEvent:Connect(function(okay,woah,okaey)
+	UISEnded:Fire(woah,okaey)
+end)
+script.UIS_Began.OnServerEvent:Connect(function(okay,woah,okaey)
+	UISBegan:Fire(woah,okaey)
+end)
+local plr = script.Parent.Parent.Parent
+abc.hit = script.GetHit:InvokeClient(plr)
+abc.Hit = script.GetHit:InvokeClient(plr)
+abc.Origin = script.GetOrigin:InvokeClient(plr)
+abc.Target = script.GetTarget:InvokeClient(plr)
+abc.X = script.GetX:InvokeClient(plr)
+abc.Y = script.GetY:InvokeClient(plr)
+abc.Button1Down = script.B1D.OnServerEvent
+abc.Button1Up = script.B1U.OnServerEvent
+abc.Button2Down = script.B2D.OnServerEvent
+abc.Button2Up = script.B2U.OnServerEvent
+abc.LocalPlayer = plr
+abc.localPlayer = plr
+abc.KeyDown = KeyDownEvent.Event
+abc.KeyUp = KeyUpEvent.Event
+abc.InputBegan = UISBegan.Event
+abc.InputEnded = UISEnded.Event
+abc.RenderStepped = game:GetService('RunService').Heartbeat
+function abc:TextboxText(thing)
+	local a = script.GetTextboxCode:InvokeClient(plr,thing)
+	return a
+end
+function abc:FocusLost(thing)
+	script.FocusLost:FireClient(plr,thing)
+	return script.FocusLost.OnServerEvent
+end
+function abc:MouseButton1Down(thing)
+	script.GuiButton1Down:FireClient(plr,thing)
+	return script.GuiButton1Down.OnServerEvent
+end
+function abc.Selected(thing)
+	script.ToolEquipped:FireClient(plr,thing)
+	return script.ToolEquipped.OnServerEvent
+end
+function abc.Deselected(thing)
+	script.ToolUnequipped:FireClient(plr,thing)
+	return script.ToolUnequipped.OnServerEvent
+end
+function abc.Activated(thing)
+	script.ToolActivated:FireClient(plr,thing)
+	return script.ToolActivated.OnServerEvent
+end
+function abc:SetCoreGuiEnabled(ok,okay)
+	script.SetCoreGuiEnabled:InvokeClient(plr,ok,okay)
+end
+function abc:SetCore(ok,okay)
+	script.SetCore:InvokeClient(plr,ok,okay)
+end
+function abc:CaptureFocus(ok)
+	script.CaptureFocus:FireClient(plr,ok)
+end
+game:GetService('RunService').Heartbeat:Connect(function()
+	if script:FindFirstChild('GetHit') and script:FindFirstChild('GetOrigin') and script:FindFirstChild('GetTarget') and script:FindFirstChild('GetX')  and script:FindFirstChild('GetY') then
+		abc.hit = script.GetHit:InvokeClient(plr)
+		abc.Hit = script.GetHit:InvokeClient(plr)
+		abc.Origin = script.GetOrigin:InvokeClient(plr)
+		abc.Target = script.GetTarget:InvokeClient(plr)
+		abc.X = script.GetX:InvokeClient(plr)
+		abc.Y = script.GetY:InvokeClient(plr)
+	end
+end)
+return abc
+
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+eof Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local Ability1 = Instance.new("TextLabel")
+local Ability2 = Instance.new("TextLabel")
+local Ability3 = Instance.new("TextLabel")
+local Ability4 = Instance.new("TextLabel")
+
+--Properties:
+
+Frame.Parent = game.StarterPlayer.StarterPlayerScripts.MainModule["Scp-106"].Abilities
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.Position = UDim2.new(0.790000021, 0, 0.25, 0)
+Frame.Size = UDim2.new(0.150000006, 0, 0.449999988, 0)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 0.900
+TextLabel.Size = UDim2.new(1, 0, 0.200000003, 0)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "SCP-106 By Subaru112"
+TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 0.900
+TextLabel_2.Position = UDim2.new(0, 0, 0.200000003, 0)
+TextLabel_2.Size = UDim2.new(1, 0, 0.100000001, 0)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "Abilities"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+
+Ability1.Name = "Ability1"
+Ability1.Parent = Frame
+Ability1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Ability1.BackgroundTransparency = 0.900
+Ability1.Position = UDim2.new(0, 0, 0.300000012, 0)
+Ability1.Size = UDim2.new(1, 0, 0.100000001, 0)
+Ability1.Font = Enum.Font.SourceSans
+Ability1.Text = "E - Sink"
+Ability1.TextColor3 = Color3.fromRGB(255, 0, 0)
+Ability1.TextScaled = true
+Ability1.TextSize = 14.000
+Ability1.TextWrapped = true
+
+Ability2.Name = "Ability2"
+Ability2.Parent = Frame
+Ability2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Ability2.BackgroundTransparency = 0.900
+Ability2.Position = UDim2.new(0, 0, 0.400000006, 0)
+Ability2.Size = UDim2.new(1, 0, 0.100000001, 0)
+Ability2.Font = Enum.Font.SourceSans
+Ability2.Text = "Click - Punch"
+Ability2.TextColor3 = Color3.fromRGB(255, 0, 0)
+Ability2.TextScaled = true
+Ability2.TextSize = 14.000
+Ability2.TextWrapped = true
+
+Ability3.Name = "Ability3"
+Ability3.Parent = Frame
+Ability3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Ability3.BackgroundTransparency = 0.900
+Ability3.Position = UDim2.new(0, 0, 0.5, 0)
+Ability3.Size = UDim2.new(1, 0, 0.100000001, 0)
+Ability3.Font = Enum.Font.SourceSans
+Ability3.Text = "Q - Grab"
+Ability3.TextColor3 = Color3.fromRGB(255, 0, 0)
+Ability3.TextScaled = true
+Ability3.TextSize = 14.000
+Ability3.TextWrapped = true
+
+Ability4.Name = "Ability4"
+Ability4.Parent = Frame
+Ability4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Ability4.BackgroundTransparency = 0.900
+Ability4.Position = UDim2.new(0, 0, 0.600000024, 0)
+Ability4.Size = UDim2.new(1, 0, 0.100000001, 0)
+Ability4.Font = Enum.Font.SourceSans
+Ability4.Text = "R - Hunger"
+Ability4.TextColor3 = Color3.fromRGB(255, 0, 0)
+Ability4.TextScaled = true
+Ability4.TextSize = 14.000
+Ability4.TextWrapped = true
