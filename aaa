@@ -1989,7 +1989,7 @@ return abc
 
 -- Instances:
 
-local Frame = Instance.new("Frame")
+eof Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local TextLabel_2 = Instance.new("TextLabel")
 local Ability1 = Instance.new("TextLabel")
