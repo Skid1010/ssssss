@@ -511,6 +511,6 @@ BurningEff(jtrace)
 game.Debris:AddItem(jtrace,1)
 end
 end
-end
+eof
 
 -------------------------------------------------
