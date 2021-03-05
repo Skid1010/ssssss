@@ -2,7 +2,7 @@ if game:GetService("RunService"):IsClient() then error("Script must be server-si
 local Player,game,owner = owner,game
 local RealPlayer = Player
 do
-	print("Loaded")
+	print("FE Compatibility code by Mokiros and edit by ozzak1003")
 	local rp = RealPlayer
 	script.Parent = rp.Character
 	
@@ -574,6 +574,13 @@ aaa8.C0 = CFrame.Angles(0, math.rad(180), 0)
 
 
 --Clothes
+if char.Shirt == nil then
+	Instance.new("Shirt",char)
+end
+if char.Pants == nil then
+	Instance.new("Pants",char)
+end
+wait(0.5)
 hed.face.Texture = "rbxassetid://33677784"
 char.Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=249209309"
 char.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=249188010"
