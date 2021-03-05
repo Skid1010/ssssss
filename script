@@ -1,0 +1,7 @@
+local sick = Instance.new("Sound",Character)
+sick.Parent = Character
+sick.SoundId = "rbxassetid://472032669"
+sick.Looped = true
+sick.Pitch = 1
+sick.Volume = 7
+sick:Play()
