@@ -13,8 +13,8 @@ aaa8.Part0 = hed
 aaa8.Part1 = a8
 aaa8.C0 = CFrame.Angles(0, math.rad(180), 0)
 
-end
+end)
 
 hed.face.Texture = "rbxassetid://33677784"
 
-end
+end)
