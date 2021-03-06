@@ -10,7 +10,7 @@ function C.load(a)
 	end
 return C
 
-kon=require(script[':flushed: magic'])
+<eof>=require(script[':flushed: magic'])
 Mouse,mouse,UserInputService,ToolFunction,GuiWire,RenderStepped,owner=kon,kon,kon,kon,kon,kon.RenderStepped,kon.LocalPlayer
 -----------------------------------------------------------------------
 --By Rufus14
