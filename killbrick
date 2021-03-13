@@ -1,0 +1,58 @@
+
+--Converted with ttyyuu12345's model to script plugin v4
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Part0 = Instance.new("Part")
+Script1 = Instance.new("Script")
+Part0.Name = "Kill brick"
+Part0.Parent = mas
+Part0.CFrame = CFrame.new(-158.825317, 0.500005007, 7.07933378, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part0.Position = Vector3.new(-158.825317, 0.500005007, 7.07933378)
+Part0.Color = Color3.new(1, 0, 0)
+Part0.Size = Vector3.new(4, 1, 2)
+Part0.Anchored = true
+Part0.BrickColor = BrickColor.new("Really red")
+Part0.Material = Enum.Material.SmoothPlastic
+Part0.TopSurface = Enum.SurfaceType.SmoothNoOutlines
+Part0.brickColor = BrickColor.new("Really red")
+Script1.Name = "Code"
+Script1.Parent = Part0
+table.insert(cors,sandbox(Script1,function()
+--Variables--
+local Brick = script.Parent
+--End--
+
+--Code--
+local function PlayerTouched(Part)
+	local Parent = Part.Parent
+	if game.Players:GetPlayerFromCharacter(Parent) then
+		Parent.Humanoid.Health = 0
+	end
+end
+
+Brick.Touched:connect(PlayerTouched)
+end))
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = workspace
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
