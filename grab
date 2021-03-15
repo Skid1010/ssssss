@@ -1,0 +1,216 @@
+if game:GetService("RunService"):IsClient() then error("Script must be server-side in order to work; use h/ and not hl/") end
+local Player,game,owner = owner,game
+local RealPlayer = Player
+do
+    local rp = RealPlayer
+    script.Parent = rp.Character
+   
+    --RemoteEvent for communicating
+    local Event = Instance.new("RemoteEvent")
+    Event.Name = "UserInput_Event"
+ 
+    --Fake event to make stuff like Mouse.KeyDown work
+    local function fakeEvent()
+        local t = {_fakeEvent=true,Functions={},Connect=function(self,f)table.insert(self.Functions,f) end}
+        t.connect = t.Connect
+        return t
+    end
+ 
+    --Creating fake input objects with fake variables
+    local m = {Target=nil,Hit=CFrame.new(),KeyUp=fakeEvent(),KeyDown=fakeEvent(),Button1Up=fakeEvent(),Button1Down=fakeEvent(),Button2Up=fakeEvent(),Button2Down=fakeEvent()}
+    local UIS = {InputBegan=fakeEvent(),InputEnded=fakeEvent()}
+    local CAS = {Actions={},BindAction=function(self,name,fun,touch,...)
+        CAS.Actions[name] = fun and {Name=name,Function=fun,Keys={...}} or nil
+    end}
+    --Merged 2 functions into one by checking amount of arguments
+    CAS.UnbindAction = CAS.BindAction
+ 
+    --This function will trigger the events that have been :Connect()'ed
+    local function te(self,ev,...)
+        local t = m[ev]
+        if t and t._fakeEvent then
+            for _,f in pairs(t.Functions) do
+                f(...)
+            end
+        end
+    end
+    m.TrigEvent = te
+    UIS.TrigEvent = te
+ 
+    Event.OnServerEvent:Connect(function(plr,io)
+        if plr~=rp then return end
+        m.Target = io.Target
+        m.Hit = io.Hit
+        if not io.isMouse then
+            local b = io.UserInputState == Enum.UserInputState.Begin
+            if io.UserInputType == Enum.UserInputType.MouseButton1 then
+                return m:TrigEvent(b and "Button1Down" or "Button1Up")
+            end
+            if io.UserInputType == Enum.UserInputType.MouseButton2 then
+                return m:TrigEvent(b and "Button2Down" or "Button2Up")
+            end
+            for _,t in pairs(CAS.Actions) do
+                for _,k in pairs(t.Keys) do
+                    if k==io.KeyCode then
+                        t.Function(t.Name,io.UserInputState,io)
+                    end
+                end
+            end
+            m:TrigEvent(b and "KeyDown" or "KeyUp",io.KeyCode.Name:lower())
+            UIS:TrigEvent(b and "InputBegan" or "InputEnded",io,false)
+        end
+    end)
+    Event.Parent = NLS([==[
+    local Player = game:GetService("Players").LocalPlayer
+    local Event = script:WaitForChild("UserInput_Event")
+ 
+    local Mouse = Player:GetMouse()
+    local UIS = game:GetService("UserInputService")
+    local input = function(io,a)
+        if a then return end
+        --Since InputObject is a client-side instance, we create and pass table instead
+        Event:FireServer({KeyCode=io.KeyCode,UserInputType=io.UserInputType,UserInputState=io.UserInputState,Hit=Mouse.Hit,Target=Mouse.Target})
+    end
+    UIS.InputBegan:Connect(input)
+    UIS.InputEnded:Connect(input)
+ 
+    local h,t
+    --Give the server mouse data 30 times every second, but only if the values changed
+    --If player is not moving their mouse, client won't fire events
+    while wait(1/30) do
+        if h~=Mouse.Hit or t~=Mouse.Target then
+            h,t=Mouse.Hit,Mouse.Target
+            Event:FireServer({isMouse=true,Target=t,Hit=h})
+        end
+    end]==],Player.Character)
+ 
+    ----Sandboxed game object that allows the usage of client-side methods and services
+    --Real game object
+    local _rg = game
+ 
+    --Metatable for fake service
+    local fsmt = {
+        __index = function(self,k)
+            local s = rawget(self,"_RealService")
+            if s then
+                return typeof(s[k])=="function"
+                and function(_,...)return s[k](s,...)end or s[k]
+            end
+        end,
+        __newindex = function(self,k,v)
+            local s = rawget(self,"_RealService")
+            if s then s[k]=v end
+        end
+    }
+    local function FakeService(t,RealService)
+        t._RealService = typeof(RealService)=="string" and _rg:GetService(RealService) or RealService
+        return setmetatable(t,fsmt)
+    end
+ 
+    --Fake game object
+    local g = {
+        GetService = function(self,s)
+            return rawget(self,s) or _rg:GetService(s)
+        end,
+        Players = FakeService({
+            LocalPlayer = FakeService({GetMouse=function(self)return m end},Player)
+        },"Players"),
+        UserInputService = FakeService(UIS,"UserInputService"),
+        ContextActionService = FakeService(CAS,"ContextActionService"),
+        RunService = FakeService({
+            _btrs = {},
+            RenderStepped = _rg:GetService("RunService").Heartbeat,
+            BindToRenderStep = function(self,name,_,fun)
+                self._btrs[name] = self.Heartbeat:Connect(fun)
+            end,
+            UnbindFromRenderStep = function(self,name)
+                self._btrs[name]:Disconnect()
+            end,
+        },"RunService")
+    }
+    rawset(g.Players,"localPlayer",g.Players.LocalPlayer)
+    g.service = g.GetService
+    FakeService(g,game)
+    --Changing owner to fake player object to support owner:GetMouse()
+    game,owner = g,g.Players.LocalPlayer
+end
+
+
+wait()
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+local m = plr:GetMouse()
+local RS = char.Torso:WaitForChild("Right Shoulder")
+local LS = char.Torso:WaitForChild("Left Shoulder")
+local Debris = game:GetService("Debris")
+local Run = game:GetService("RunService")
+local N = char.Torso.Neck
+local Aim = Instance.new("Part", char)
+Aim.CFrame = char.Head.CFrame
+Aim.CanCollide = false
+Aim.Anchored = true
+Aim.Transparency = 1
+Aim.Size = Vector3.new(2, 2, 2)
+
+meter = 5
+
+Target = nil
+Holding = false
+
+m.Button1Down:Connect(function()
+	if Holding == false then
+		if m.Target ~= nil and m.Target.ClassName == "Part" and m.Target.Material ~= Enum.Material.Grass and m.Target.Name ~= "Base" and m.Target.Name ~= "Baseplate" then
+			Holding = true
+			Target = m.Target
+			Target.Anchored = true
+			plr.CameraMaxZoomDistance = 0
+			meter = 5
+		end
+	else
+		if Target ~= nil then
+			Holding = false
+			Target.Anchored = false
+			Target = nil
+			plr.CameraMaxZoomDistance = 400
+		end
+	end
+end)
+
+m.Button2Down:Connect(function()
+	if Holding == true and Target ~= nil then
+		Holding = false
+		Target.Anchored = false
+		Target.Velocity = Aim.CFrame.lookVector * 150
+		Target = nil
+		plr.CameraMaxZoomDistance = 400
+	end
+end)
+
+m.KeyDown:Connect(function(k)
+	k:lower()
+	if k == "q" then
+		meter = meter + 1
+	end
+end)
+
+m.KeyDown:Connect(function(k)
+	k:lower()
+	if k == "e" then
+		if meter ~= 5 then
+			meter = meter - 1
+		end
+	end
+end)
+
+Run.RenderStepped:Connect(function()
+	Aim.CFrame = char.Head.CFrame
+	Aim.CFrame = CFrame.new(Aim.Position, m.Hit.Position)
+	if Holding == true then
+		for i = 0,1,.01 do
+			wait(0.01)
+			if Target ~= nil then
+				Target.CFrame = Target.CFrame:Lerp(Aim.CFrame * CFrame.new(0, 0, -meter), i)
+			end
+		end
+	end
+end)
