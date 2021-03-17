@@ -4,6 +4,7 @@ local RealPlayer = Player
 do
     print("loaded")
     print("vroom vroom have fun")
+    printe("don't mind the error below if i change that line the whole script breaks soo")
     local rp = RealPlayer
     script.Parent = rp.Character
    
