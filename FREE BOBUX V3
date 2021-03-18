@@ -1,0 +1,232 @@
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Script0 = Instance.new("Script")
+Model1 = Instance.new("Model")
+Model2 = Instance.new("Model")
+Part3 = Instance.new("Part")
+Decal4 = Instance.new("Decal")
+Part5 = Instance.new("Part")
+Decal6 = Instance.new("Decal")
+Part7 = Instance.new("Part")
+Decal8 = Instance.new("Decal")
+Part9 = Instance.new("Part")
+Decal10 = Instance.new("Decal")
+Part11 = Instance.new("Part")
+Decal12 = Instance.new("Decal")
+Part13 = Instance.new("Part")
+Decal14 = Instance.new("Decal")
+Model15 = Instance.new("Model")
+Part16 = Instance.new("Part")
+Script17 = Instance.new("Script")
+Part18 = Instance.new("Part")
+SurfaceGui19 = Instance.new("SurfaceGui")
+TextLabel20 = Instance.new("TextLabel")
+ClickDetector21 = Instance.new("ClickDetector")
+Part22 = Instance.new("Part")
+SurfaceGui23 = Instance.new("SurfaceGui")
+TextLabel24 = Instance.new("TextLabel")
+ClickDetector25 = Instance.new("ClickDetector")
+Script0.Parent = mas
+table.insert(cors,sandbox(Script0,function()
+print("Ok")
+end))
+Model1.Name = "CLICK TO GET FREE BOBUX"
+Model1.Parent = Script0
+Model2.Name = "WHEN THE IMPOSTOR IS SUS!"
+Model2.Parent = Model1
+Part3.Parent = Model2
+Part3.CFrame = CFrame.new(-2211.62793, 1.84852767, 79.5931625, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part3.Position = Vector3.new(-2211.62793, 1.84852767, 79.5931625)
+Part3.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part3.Size = Vector3.new(20.1767292, 19.5691509, 2)
+Part3.Anchored = true
+Part3.BottomSurface = Enum.SurfaceType.Smooth
+Part3.BrickColor = BrickColor.new("Really black")
+Part3.Material = Enum.Material.Concrete
+Part3.TopSurface = Enum.SurfaceType.Smooth
+Part3.brickColor = BrickColor.new("Really black")
+Decal4.Name = "When the impostor is sus!"
+Decal4.Parent = Part3
+Decal4.Texture = "http://www.roblox.com/asset/?id=5986133555"
+Part5.Parent = Model2
+Part5.CFrame = CFrame.new(-2211.62793, 1.84852767, 57.3191452, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+Part5.Orientation = Vector3.new(0, 180, 0)
+Part5.Position = Vector3.new(-2211.62793, 1.84852767, 57.3191452)
+Part5.Rotation = Vector3.new(-180, 0, -180)
+Part5.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part5.Size = Vector3.new(20.1767292, 19.5691509, 2)
+Part5.Anchored = true
+Part5.BottomSurface = Enum.SurfaceType.Smooth
+Part5.BrickColor = BrickColor.new("Really black")
+Part5.Material = Enum.Material.Concrete
+Part5.TopSurface = Enum.SurfaceType.Smooth
+Part5.brickColor = BrickColor.new("Really black")
+Decal6.Name = "When the impostor is sus!"
+Decal6.Parent = Part5
+Decal6.Texture = "http://www.roblox.com/asset/?id=5986133555"
+Part7.Parent = Model2
+Part7.CFrame = CFrame.new(-2211.50879, -8.93660545, 68.4940643, 0, -1, 0, 0, 0, -1, 1, 0, 0)
+Part7.Orientation = Vector3.new(90, -90, 0)
+Part7.Position = Vector3.new(-2211.50879, -8.93660545, 68.4940643)
+Part7.Rotation = Vector3.new(90, 0, 90)
+Part7.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part7.Size = Vector3.new(20.1767292, 19.5691509, 2)
+Part7.Anchored = true
+Part7.BottomSurface = Enum.SurfaceType.Smooth
+Part7.BrickColor = BrickColor.new("Really black")
+Part7.Material = Enum.Material.Concrete
+Part7.TopSurface = Enum.SurfaceType.Smooth
+Part7.brickColor = BrickColor.new("Really black")
+Decal8.Name = "When the impostor is sus!"
+Decal8.Parent = Part7
+Decal8.Texture = "http://www.roblox.com/asset/?id=5986133555"
+Part9.Parent = Model2
+Part9.CFrame = CFrame.new(-2200.91919, 1.89753687, 68.4940643, 0, 0, 1, 0, 1, 0, -1, 0, 0)
+Part9.Orientation = Vector3.new(0, 90, 0)
+Part9.Position = Vector3.new(-2200.91919, 1.89753687, 68.4940643)
+Part9.Rotation = Vector3.new(0, 90, 0)
+Part9.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part9.Size = Vector3.new(20.1767292, 19.5691509, 2)
+Part9.Anchored = true
+Part9.BottomSurface = Enum.SurfaceType.Smooth
+Part9.BrickColor = BrickColor.new("Really black")
+Part9.Material = Enum.Material.Concrete
+Part9.TopSurface = Enum.SurfaceType.Smooth
+Part9.brickColor = BrickColor.new("Really black")
+Decal10.Name = "When the impostor is sus!"
+Decal10.Parent = Part9
+Decal10.Texture = "http://www.roblox.com/asset/?id=5986133555"
+Part11.Parent = Model2
+Part11.CFrame = CFrame.new(-2211.50879, 12.6665134, 68.4940643, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+Part11.Orientation = Vector3.new(-90, -90, 0)
+Part11.Position = Vector3.new(-2211.50879, 12.6665134, 68.4940643)
+Part11.Rotation = Vector3.new(-90, 0, -90)
+Part11.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part11.Size = Vector3.new(20.1767292, 19.5691509, 2)
+Part11.Anchored = true
+Part11.BottomSurface = Enum.SurfaceType.Smooth
+Part11.BrickColor = BrickColor.new("Really black")
+Part11.Material = Enum.Material.Concrete
+Part11.TopSurface = Enum.SurfaceType.Smooth
+Part11.brickColor = BrickColor.new("Really black")
+Decal12.Name = "When the impostor is sus!"
+Decal12.Parent = Part11
+Decal12.Texture = "http://www.roblox.com/asset/?id=5986133555"
+Part13.Parent = Model2
+Part13.CFrame = CFrame.new(-2221.65405, 2.12663746, 68.4940643, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part13.Orientation = Vector3.new(0, -90, 0)
+Part13.Position = Vector3.new(-2221.65405, 2.12663746, 68.4940643)
+Part13.Rotation = Vector3.new(0, -90, 0)
+Part13.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part13.Size = Vector3.new(20.1767292, 19.5691509, 2)
+Part13.Anchored = true
+Part13.BottomSurface = Enum.SurfaceType.Smooth
+Part13.BrickColor = BrickColor.new("Really black")
+Part13.Material = Enum.Material.Concrete
+Part13.TopSurface = Enum.SurfaceType.Smooth
+Part13.brickColor = BrickColor.new("Really black")
+Decal14.Name = "When the impostor is sus!"
+Decal14.Parent = Part13
+Decal14.Texture = "http://www.roblox.com/asset/?id=5986133555"
+Model15.Name = "Tp To Click"
+Model15.Parent = Model1
+Part16.Name = "To"
+Part16.Parent = Model15
+Part16.CFrame = CFrame.new(-2210.23999, 3.59999967, 67.3284836, 0, 0, 1, 0, 1, 0, -1, 0, 0)
+Part16.Orientation = Vector3.new(0, 90, 0)
+Part16.Position = Vector3.new(-2210.23999, 3.59999967, 67.3284836)
+Part16.Rotation = Vector3.new(0, 90, 0)
+Part16.Transparency = 1
+Part16.Size = Vector3.new(7.599998, 7.19999933, 6.99999952)
+Part16.Anchored = true
+Part16.CanCollide = false
+Script17.Parent = Model15
+table.insert(cors,sandbox(Script17,function()
+script.Parent.Click.ClickDetector.MouseClick:connect(function(Player)
+	Player.Character:WaitForChild("HumanoidRootPart").CFrame = script.Parent.To.CFrame
+end)
+end))
+Part18.Name = "Click"
+Part18.Parent = Model15
+Part18.CFrame = CFrame.new(-72.8240967, 2.5, 74.0704041, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+Part18.Orientation = Vector3.new(0, 180, 0)
+Part18.Position = Vector3.new(-72.8240967, 2.5, 74.0704041)
+Part18.Rotation = Vector3.new(-180, 0, -180)
+Part18.Color = Color3.new(0.584314, 0.47451, 0.466667)
+Part18.Transparency = 1
+Part18.Size = Vector3.new(6.38999987, 5, 1)
+Part18.Anchored = true
+Part18.BrickColor = BrickColor.new("Sand red")
+Part18.brickColor = BrickColor.new("Sand red")
+Part18.FormFactor = Enum.FormFactor.Symmetric
+Part18.formFactor = Enum.FormFactor.Symmetric
+SurfaceGui19.Parent = Part18
+SurfaceGui19.CanvasSize = Vector2.new(200, 100)
+TextLabel20.Name = "SIGN"
+TextLabel20.Parent = SurfaceGui19
+TextLabel20.Size = UDim2.new(1, 0, 1, 0)
+TextLabel20.BackgroundColor = BrickColor.new("Forest green")
+TextLabel20.BackgroundColor3 = Color3.new(0.109804, 0.784314, 0.0745098)
+TextLabel20.Font = Enum.Font.SourceSansBold
+TextLabel20.FontSize = Enum.FontSize.Size48
+TextLabel20.Text = "FREE B0BUX CLICK TO GET FREE BOBUX"
+TextLabel20.TextColor = BrickColor.new("Institutional white")
+TextLabel20.TextColor3 = Color3.new(1, 1, 1)
+TextLabel20.TextScaled = true
+TextLabel20.TextSize = 48
+TextLabel20.TextWrap = true
+TextLabel20.TextWrapped = true
+ClickDetector21.Parent = Part18
+Part22.Name = "Click"
+Part22.Parent = Model15
+Part22.CFrame = CFrame.new(-72.8240967, 2.5, 74.0704041, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part22.Position = Vector3.new(-72.8240967, 2.5, 74.0704041)
+Part22.Color = Color3.new(0.584314, 0.47451, 0.466667)
+Part22.Transparency = 1
+Part22.Size = Vector3.new(6.38999987, 5, 1)
+Part22.Anchored = true
+Part22.BrickColor = BrickColor.new("Sand red")
+Part22.brickColor = BrickColor.new("Sand red")
+Part22.FormFactor = Enum.FormFactor.Symmetric
+Part22.formFactor = Enum.FormFactor.Symmetric
+SurfaceGui23.Parent = Part22
+SurfaceGui23.CanvasSize = Vector2.new(200, 100)
+TextLabel24.Name = "SIGN"
+TextLabel24.Parent = SurfaceGui23
+TextLabel24.Size = UDim2.new(1, 0, 1, 0)
+TextLabel24.BackgroundColor = BrickColor.new("Forest green")
+TextLabel24.BackgroundColor3 = Color3.new(0.109804, 0.784314, 0.0745098)
+TextLabel24.Font = Enum.Font.SourceSansBold
+TextLabel24.FontSize = Enum.FontSize.Size48
+TextLabel24.Text = "FREE B0BUX CLICK TO GET FREE BOBUX"
+TextLabel24.TextColor = BrickColor.new("Institutional white")
+TextLabel24.TextColor3 = Color3.new(1, 1, 1)
+TextLabel24.TextScaled = true
+TextLabel24.TextSize = 48
+TextLabel24.TextWrap = true
+TextLabel24.TextWrapped = true
+ClickDetector25.Parent = Part22
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = workspace
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
