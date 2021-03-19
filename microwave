@@ -1,0 +1,310 @@
+--Made by CraftyAlphaMan
+--Converted with ttyyuu12345's model to script plugin v4
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Script0 = Instance.new("Script")
+Model1 = Instance.new("Model")
+Model2 = Instance.new("Model")
+Part3 = Instance.new("Part")
+Part4 = Instance.new("Part")
+Part5 = Instance.new("Part")
+Part6 = Instance.new("Part")
+Part7 = Instance.new("Part")
+Model8 = Instance.new("Model")
+Part9 = Instance.new("Part")
+Part10 = Instance.new("Part")
+Part11 = Instance.new("Part")
+Part12 = Instance.new("Part")
+Part13 = Instance.new("Part")
+Part14 = Instance.new("Part")
+SpecialMesh15 = Instance.new("SpecialMesh")
+Model16 = Instance.new("Model")
+Part17 = Instance.new("Part")
+SurfaceGui18 = Instance.new("SurfaceGui")
+TextLabel19 = Instance.new("TextLabel")
+ClickDetector20 = Instance.new("ClickDetector")
+Script21 = Instance.new("Script")
+Part22 = Instance.new("Part")
+SurfaceGui23 = Instance.new("SurfaceGui")
+TextLabel24 = Instance.new("TextLabel")
+ClickDetector25 = Instance.new("ClickDetector")
+Script26 = Instance.new("Script")
+Part27 = Instance.new("Part")
+PointLight28 = Instance.new("PointLight")
+Sound29 = Instance.new("Sound")
+Sound30 = Instance.new("Sound")
+Script0.Name = "MicrowaveA"
+Script0.Parent = mas
+table.insert(cors,sandbox(Script0,function()
+print("Microwave Loaded")
+print("Have fun..")
+
+end))
+Model1.Name = "Microwave"
+Model1.Parent = Script0
+Model2.Name = "Window"
+Model2.Parent = Model1
+Part3.Parent = Model2
+Part3.CFrame = CFrame.new(-124.636719, 2.77175403, 35.1630554, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part3.Orientation = Vector3.new(0, -90, 0)
+Part3.Position = Vector3.new(-124.636719, 2.77175403, 35.1630554)
+Part3.Rotation = Vector3.new(0, -90, 0)
+Part3.Size = Vector3.new(0.267685473, 1.29900408, 0.474723399)
+Part3.Anchored = true
+Part3.BottomSurface = Enum.SurfaceType.Smooth
+Part3.Material = Enum.Material.Metal
+Part3.TopSurface = Enum.SurfaceType.Smooth
+Part4.Parent = Model2
+Part4.CFrame = CFrame.new(-125.402191, 2.32577133, 35.1630554, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part4.Orientation = Vector3.new(0, -90, 0)
+Part4.Position = Vector3.new(-125.402191, 2.32577133, 35.1630554)
+Part4.Rotation = Vector3.new(0, -90, 0)
+Part4.Size = Vector3.new(0.267685473, 0.246169835, 1.98742747)
+Part4.Anchored = true
+Part4.BottomSurface = Enum.SurfaceType.Smooth
+Part4.Material = Enum.Material.Metal
+Part4.TopSurface = Enum.SurfaceType.Smooth
+Part5.Parent = Model2
+Part5.CFrame = CFrame.new(-126.139359, 2.77175403, 35.1630554, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part5.Orientation = Vector3.new(0, -90, 0)
+Part5.Position = Vector3.new(-126.139359, 2.77175403, 35.1630554)
+Part5.Rotation = Vector3.new(0, -90, 0)
+Part5.Size = Vector3.new(0.267685473, 1.29900408, 0.474723399)
+Part5.Anchored = true
+Part5.BottomSurface = Enum.SurfaceType.Smooth
+Part5.Material = Enum.Material.Metal
+Part5.TopSurface = Enum.SurfaceType.Smooth
+Part6.Parent = Model2
+Part6.CFrame = CFrame.new(-125.402191, 3.21509194, 35.1630554, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part6.Orientation = Vector3.new(0, -90, 0)
+Part6.Position = Vector3.new(-125.402191, 3.21509194, 35.1630554)
+Part6.Rotation = Vector3.new(0, -90, 0)
+Part6.Size = Vector3.new(0.267685473, 0.246169835, 1.98742747)
+Part6.Anchored = true
+Part6.BottomSurface = Enum.SurfaceType.Smooth
+Part6.Material = Enum.Material.Metal
+Part6.TopSurface = Enum.SurfaceType.Smooth
+Part7.Parent = Model2
+Part7.CFrame = CFrame.new(-125.402191, 2.68658137, 35.1630554, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part7.Orientation = Vector3.new(0, -90, 0)
+Part7.Position = Vector3.new(-125.402191, 2.68658137, 35.1630554)
+Part7.Rotation = Vector3.new(0, -90, 0)
+Part7.Transparency = 1
+Part7.Size = Vector3.new(0.267685473, 0.967790008, 1.98742747)
+Part7.Anchored = true
+Part7.BottomSurface = Enum.SurfaceType.Smooth
+Part7.Material = Enum.Material.Metal
+Part7.TopSurface = Enum.SurfaceType.Smooth
+Model8.Name = "MainMicrowave"
+Model8.Parent = Model1
+Part9.Parent = Model8
+Part9.CFrame = CFrame.new(-126.261757, 2.77175403, 34.465229, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part9.Position = Vector3.new(-126.261757, 2.77175403, 34.465229)
+Part9.Size = Vector3.new(0.267685473, 1.29900408, 1.70800257)
+Part9.Anchored = true
+Part9.BottomSurface = Enum.SurfaceType.Smooth
+Part9.Material = Enum.Material.Metal
+Part9.TopSurface = Enum.SurfaceType.Smooth
+Part10.Parent = Model8
+Part10.CFrame = CFrame.new(-125.374992, 2.16663575, 34.449913, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part10.Position = Vector3.new(-125.374992, 2.16663575, 34.449913)
+Part10.Size = Vector3.new(1.51480246, 0.0887671858, 1.73861194)
+Part10.Anchored = true
+Part10.BottomSurface = Enum.SurfaceType.Smooth
+Part10.Material = Enum.Material.Metal
+Part10.TopSurface = Enum.SurfaceType.Smooth
+Part11.Parent = Model8
+Part11.CFrame = CFrame.new(-124.509155, 2.77175403, 34.4800377, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part11.Position = Vector3.new(-124.509155, 2.77175403, 34.4800377)
+Part11.Size = Vector3.new(0.267685473, 1.29900408, 1.6783855)
+Part11.Anchored = true
+Part11.BottomSurface = Enum.SurfaceType.Smooth
+Part11.Material = Enum.Material.Metal
+Part11.TopSurface = Enum.SurfaceType.Smooth
+Part12.Parent = Model8
+Part12.CFrame = CFrame.new(-125.385902, 2.77175403, 33.7024193, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part12.Orientation = Vector3.new(0, -90, 0)
+Part12.Position = Vector3.new(-125.385902, 2.77175403, 33.7024193)
+Part12.Rotation = Vector3.new(0, -90, 0)
+Part12.Size = Vector3.new(0.267685473, 1.29900408, 2.01999998)
+Part12.Anchored = true
+Part12.BottomSurface = Enum.SurfaceType.Smooth
+Part12.Material = Enum.Material.Metal
+Part12.TopSurface = Enum.SurfaceType.Smooth
+Part13.Parent = Model8
+Part13.CFrame = CFrame.new(-125.374992, 3.37853265, 34.449913, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part13.Position = Vector3.new(-125.374992, 3.37853265, 34.449913)
+Part13.Size = Vector3.new(1.51480246, 0.0887671858, 1.73861194)
+Part13.Anchored = true
+Part13.BottomSurface = Enum.SurfaceType.Smooth
+Part13.Material = Enum.Material.Metal
+Part13.TopSurface = Enum.SurfaceType.Smooth
+Part14.Name = "Chicken"
+Part14.Parent = Model1
+Part14.CFrame = CFrame.new(-125.339279, 2.42611694, 34.4104614, -0.813952029, -0.453990698, 0.362457722, -0.406783611, -2.65240669e-05, -0.913524508, 0.414740503, -0.891009331, -0.18465583)
+Part14.Orientation = Vector3.new(66, 117, -90)
+Part14.Position = Vector3.new(-125.339279, 2.42611694, 34.4104614)
+Part14.Rotation = Vector3.new(101.43, 21.25, 150.850006)
+Part14.Color = Color3.new(0.803922, 0.803922, 0.803922)
+Part14.Size = Vector3.new(0.666471362, 0.784817338, 0.683615923)
+Part14.Anchored = true
+Part14.BottomSurface = Enum.SurfaceType.Smooth
+Part14.BrickColor = BrickColor.new("Mid gray")
+Part14.TopSurface = Enum.SurfaceType.Smooth
+Part14.brickColor = BrickColor.new("Mid gray")
+Part14.FormFactor = Enum.FormFactor.Plate
+Part14.formFactor = Enum.FormFactor.Plate
+SpecialMesh15.Parent = Part14
+SpecialMesh15.MeshId = "http://www.roblox.com/asset/?id=13073626"
+SpecialMesh15.Scale = Vector3.new(0.999707043, 0.735954046, 1.02542448)
+SpecialMesh15.TextureId = "http://www.roblox.com/asset/?id=13073598"
+SpecialMesh15.MeshType = Enum.MeshType.FileMesh
+Model16.Name = "StartStopLight"
+Model16.Parent = Model1
+Part17.Name = "Stop"
+Part17.Parent = Model16
+Part17.CFrame = CFrame.new(-124.522087, 2.65471601, 35.3244667, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+Part17.Orientation = Vector3.new(0, 180, 0)
+Part17.Position = Vector3.new(-124.522087, 2.65471601, 35.3244667)
+Part17.Rotation = Vector3.new(-180, 0, -180)
+Part17.Size = Vector3.new(0.201157257, 0.146115303, 0.0500000007)
+Part17.Anchored = true
+Part17.Material = Enum.Material.Metal
+Part17.FormFactor = Enum.FormFactor.Symmetric
+Part17.formFactor = Enum.FormFactor.Symmetric
+SurfaceGui18.Name = "StopGui"
+SurfaceGui18.Parent = Part17
+SurfaceGui18.CanvasSize = Vector2.new(200, 100)
+TextLabel19.Name = "StopLabel"
+TextLabel19.Parent = SurfaceGui18
+TextLabel19.Size = UDim2.new(1, 0, 1, 0)
+TextLabel19.BackgroundColor = BrickColor.new("Institutional white")
+TextLabel19.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel19.BackgroundTransparency = 1
+TextLabel19.Font = Enum.Font.Highway
+TextLabel19.FontSize = Enum.FontSize.Size48
+TextLabel19.Text = "Stop"
+TextLabel19.TextColor = BrickColor.new("Institutional white")
+TextLabel19.TextColor3 = Color3.new(1, 1, 1)
+TextLabel19.TextScaled = true
+TextLabel19.TextSize = 48
+TextLabel19.TextStrokeTransparency = 0
+TextLabel19.TextWrap = true
+TextLabel19.TextWrapped = true
+ClickDetector20.Parent = Part17
+ClickDetector20.MaxActivationDistance = 10
+Script21.Parent = Part17
+table.insert(cors,sandbox(Script21,function()
+local Light = workspace.MicrowaveA.Microwave.StartStopLight.Light.PointLight
+local Stop = workspace.MicrowaveA.Microwave.StartStopLight.Stop
+local MicrowavingSound = workspace.MicrowaveA.Microwave.Mmm
+local BeepSound = workspace.MicrowaveA.Microwave.Beep
+
+Stop.ClickDetector.MouseClick:connect(function()
+	if Light.Enabled == true then
+		Light.Enabled = false
+		MicrowavingSound:Stop()
+		BeepSound:Play()
+	end
+end)
+end))
+Part22.Name = "Start"
+Part22.Parent = Model16
+Part22.CFrame = CFrame.new(-124.522087, 2.91253781, 35.3244667, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+Part22.Orientation = Vector3.new(0, 180, 0)
+Part22.Position = Vector3.new(-124.522087, 2.91253781, 35.3244667)
+Part22.Rotation = Vector3.new(-180, 0, -180)
+Part22.Size = Vector3.new(0.201157257, 0.146115303, 0.0500000007)
+Part22.Anchored = true
+Part22.Material = Enum.Material.Metal
+Part22.FormFactor = Enum.FormFactor.Symmetric
+Part22.formFactor = Enum.FormFactor.Symmetric
+SurfaceGui23.Name = "StartGui"
+SurfaceGui23.Parent = Part22
+SurfaceGui23.CanvasSize = Vector2.new(200, 100)
+TextLabel24.Name = "StartLabel"
+TextLabel24.Parent = SurfaceGui23
+TextLabel24.Size = UDim2.new(1, 0, 1, 0)
+TextLabel24.BackgroundColor = BrickColor.new("Institutional white")
+TextLabel24.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel24.BackgroundTransparency = 1
+TextLabel24.Font = Enum.Font.Highway
+TextLabel24.FontSize = Enum.FontSize.Size48
+TextLabel24.Text = "Start"
+TextLabel24.TextColor = BrickColor.new("Institutional white")
+TextLabel24.TextColor3 = Color3.new(1, 1, 1)
+TextLabel24.TextScaled = true
+TextLabel24.TextSize = 48
+TextLabel24.TextStrokeTransparency = 0
+TextLabel24.TextWrap = true
+TextLabel24.TextWrapped = true
+ClickDetector25.Parent = Part22
+ClickDetector25.MaxActivationDistance = 10
+Script26.Parent = Part22
+table.insert(cors,sandbox(Script26,function()
+local Light = workspace.MicrowaveA.Microwave.StartStopLight.Light.PointLight
+local Start = workspace.MicrowaveA.Microwave.StartStopLight.Start
+local MicrowavingSound = workspace.MicrowaveA.Microwave.Mmm
+local BeepSound = workspace.MicrowaveA.Microwave.Beep
+
+Start.ClickDetector.MouseClick:connect(function()
+	if Light.Enabled == false then
+		Light.Enabled = true
+		BeepSound:Stop()
+		MicrowavingSound:Play()
+	end
+end)
+end))
+Part27.Name = "Light"
+Part27.Parent = Model16
+Part27.CFrame = CFrame.new(-124.621902, 2.78551388, 34.2816582, 0, -1, 0, 1, 0, 0, 0, 0, 1)
+Part27.Orientation = Vector3.new(0, 0, 90)
+Part27.Position = Vector3.new(-124.621902, 2.78551388, 34.2816582)
+Part27.Rotation = Vector3.new(0, 0, 90)
+Part27.Color = Color3.new(0.992157, 0.917647, 0.552941)
+Part27.Size = Vector3.new(0.541478813, 0.054147888, 0.541478813)
+Part27.Anchored = true
+Part27.BottomSurface = Enum.SurfaceType.Smooth
+Part27.BrickColor = BrickColor.new("Cool yellow")
+Part27.Material = Enum.Material.SmoothPlastic
+Part27.Reflectance = 0.40000000596046
+Part27.TopSurface = Enum.SurfaceType.Smooth
+Part27.brickColor = BrickColor.new("Cool yellow")
+Part27.FormFactor = Enum.FormFactor.Custom
+Part27.formFactor = Enum.FormFactor.Custom
+PointLight28.Parent = Part27
+PointLight28.Color = Color3.new(1, 1, 0.133333)
+PointLight28.Enabled = false
+PointLight28.Range = 7
+Sound29.Name = "Mmm"
+Sound29.Parent = Model1
+Sound29.Looped = true
+Sound29.SoundId = "rbxassetid://4985804952"
+Sound29.Volume = 1
+Sound30.Name = "Beep"
+Sound30.Parent = Model1
+Sound30.SoundId = "rbxassetid://6537665807"
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = workspace
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
