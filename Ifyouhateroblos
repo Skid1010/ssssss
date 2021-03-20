@@ -1,0 +1,85 @@
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Model0 = Instance.new("Model")
+Part1 = Instance.new("Part")
+SurfaceGui2 = Instance.new("SurfaceGui")
+TextLabel3 = Instance.new("TextLabel")
+ClickDetector4 = Instance.new("ClickDetector")
+Script5 = Instance.new("Script")
+Sound6 = Instance.new("Sound")
+Model0.Name = "Rooblos"
+Model0.Parent = mas
+Part1.Name = "StartA"
+Part1.Parent = Model0
+Part1.CFrame = CFrame.new(0.769805789, 1.52982557, 71.9841919, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part1.Position = Vector3.new(0.769805789, 1.52982557, 71.9841919)
+Part1.Size = Vector3.new(5.21999979, 3.05965114, 0.0500000007)
+Part1.Anchored = true
+Part1.Material = Enum.Material.Metal
+Part1.FormFactor = Enum.FormFactor.Symmetric
+Part1.formFactor = Enum.FormFactor.Symmetric
+SurfaceGui2.Name = "StartAGui"
+SurfaceGui2.Parent = Part1
+SurfaceGui2.CanvasSize = Vector2.new(200, 100)
+TextLabel3.Name = "StartALabel"
+TextLabel3.Parent = SurfaceGui2
+TextLabel3.Size = UDim2.new(1, 0, 1, 0)
+TextLabel3.BackgroundColor = BrickColor.new("Institutional white")
+TextLabel3.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel3.BackgroundTransparency = 1
+TextLabel3.Font = Enum.Font.Highway
+TextLabel3.FontSize = Enum.FontSize.Size48
+TextLabel3.Text = "if you hate roblos"
+TextLabel3.TextColor = BrickColor.new("Institutional white")
+TextLabel3.TextColor3 = Color3.new(1, 1, 1)
+TextLabel3.TextScaled = true
+TextLabel3.TextSize = 48
+TextLabel3.TextStrokeTransparency = 0
+TextLabel3.TextWrap = true
+TextLabel3.TextWrapped = true
+ClickDetector4.Parent = Part1
+ClickDetector4.MaxActivationDistance = 10
+Script5.Parent = Part1
+table.insert(cors,sandbox(Script5,function()
+local StartA = workspace.Rooblos.StartA
+local ROBLOS = workspace.Rooblos.ROBLOS
+
+StartA.ClickDetector.MouseClick:connect(function()
+	if ROBLOS.Playing == false then
+		ROBLOS:Play()
+		if ROBLOS.Playing == true then
+			StartA.StartAGui.StartALabel.Text = "playing"
+			wait(25)
+			StartA.StartAGui.StartALabel.Text = "if you hate roblos"
+		end
+	end
+end)
+end))
+Sound6.Name = "ROBLOS"
+Sound6.Parent = Model0
+Sound6.PlayOnRemove = true
+Sound6.SoundId = "rbxassetid://6329752781"
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = workspace
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
