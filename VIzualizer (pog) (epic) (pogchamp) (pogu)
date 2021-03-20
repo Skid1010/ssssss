@@ -1,0 +1,49 @@
+owner.Character.Archivable = true
+
+local head = Instance.new("Part",workspace)
+head.Size = Vector3.new(1,1,1)
+head.Name = "Torso"
+head.CanCollide = false
+head.Anchored = false
+head.Position = owner.Character.Torso.Position+Vector3.new(0,5,0)
+X = 1
+local the = 0
+head.TopSurface = "Smooth"
+head.BottomSurface = "Smooth"
+
+Instance.new("Sound",head).Looped = true
+local music = head.Sound
+music.SoundId = "rbxassetid://4575329367"
+music.Looped = true
+music.Volume = 5
+music:Play()
+
+spawn(function()
+local pos = Instance.new("BodyPosition",head)
+pos.P = 10000
+head.Anchored = false
+
+local posd = Instance.new("BodyGyro",head)
+posd.P = 2500
+posd.MaxTorque = Vector3.new(99999,99999,99999)
+while wait() do
+pcall(function()
+pos.Position = owner.Character.Head.Position+Vector3.new(0,5,0)
+posd.CFrame = CFrame.Angles(X,X,X)
+head.Size = Vector3.new(the/200,the/200,the/200)
+X=X+(1/60)
+end)
+end
+end)
+
+Instance.new("Folder",owner.PlayerGui).Name = "Events"
+local Events = owner.PlayerGui.Events
+Instance.new("RemoteEvent",Events).OnServerEvent:Connect(function(doug,s)
+the = s
+end)
+
+NLS([[
+while wait() do
+script.Parent.Events.RemoteEvent:FireServer(workspace.Torso.Sound.PlaybackLoudness)
+end
+]],owner.PlayerGui)
