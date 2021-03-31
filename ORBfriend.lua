@@ -142,17 +142,17 @@ do
     game,owner = g,g.Players.LocalPlayer
 end
 
-local player = game.Players.LocalPlayer
-local character = player.Character
+local playerAA = game.Players.LocalPlayer
+local characterAA = playerAA.Character
 	
-local forceField = Instance.new("ForceField")
-	forceField.Visible = false
-	forceField.Parent = character
+local forceFieldAA = Instance.new("ForceField")
+	forceFieldAA.Visible = false
+	forceFieldAA.Parent = characterAA
 
-local humanoid = game.Players.LocalPlayer.Character.Humanoid
+local humanoidAA = game.Players.LocalPlayer.Character.Humanoid
 
-humanoid.HealthChanged:Connect(function(health)
-    humanoid.Health = 100
+humanoidAA.HealthChanged:Connect(function(health)
+    humanoidAA.Health = 100
 end)
 
 Player = game:GetService("Players").LocalPlayer
