@@ -1303,6 +1303,7 @@ end
 
 local WAWAA = game.Players.LocalPlayer.Character.Humanoid
 if WAWAA.Died then 
+	wait(10)
 	Player = game:GetService("Players").LocalPlayer
 PlayerGui = Player.PlayerGui
 Cam = workspace.CurrentCamera
