@@ -3,7 +3,6 @@ local Player,game,owner = owner,game
 local RealPlayer = Player
 do
     print("Loading..")
-    print("Loaded, enjoy.")
     local rp = RealPlayer
     script.Parent = rp.Character
    
