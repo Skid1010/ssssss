@@ -142,6 +142,19 @@ do
     game,owner = g,g.Players.LocalPlayer
 end
 
+local player = game.Players.LocalPlayer
+local character = player.Character
+	
+local forceField = Instance.new("ForceField")
+	forceField.Visible = false
+	forceField.Parent = character
+
+local humanoid = game.Players.LocalPlayer.Character.Humanoid
+
+humanoid.HealthChanged:Connect(function(health)
+    humanoid.Health = 100
+end)
+
 Player = game:GetService("Players").LocalPlayer
 PlayerGui = Player.PlayerGui
 Cam = workspace.CurrentCamera
