@@ -1094,7 +1094,7 @@ function shoottoughbullet()
 end
 
 function grab()
-	if Mouse.Target.Parent:FindFirstChild("Torso") then
+	if Mouse.Target.CanCollide == true then
 		local targ = Mouse.Target
 		GRABBED = true
 		targ.Anchored = true
