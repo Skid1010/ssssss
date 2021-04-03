@@ -1094,7 +1094,7 @@ function shoottoughbullet()
 end
 
 function grab()
-		if Mouse.Target.Locked == false then
+		if Mouse.Target.Mass > -1 then
 		local targ = Mouse.Target
 		GRABBED = true
 		targ.Anchored = true
