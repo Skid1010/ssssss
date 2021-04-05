@@ -812,6 +812,7 @@ Humanoid.Died:connect(function()
 end)
 
 print(Class_Name.." loaded.")
+print("Enjoy, "..game.Players.LocalPlayer.Name..".")
 
 local ORB = IT("Part",Weapon)
 ORB.CanCollide = false
@@ -1289,8 +1290,6 @@ while true do
 	end
 	ORB.Anchored = false
 end
-
-print("Enjoy, "..game.Players.LocalPlayer.Name..".")
 
 --//=================================\\
 --\\=================================//
