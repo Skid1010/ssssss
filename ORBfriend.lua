@@ -1135,7 +1135,7 @@ end
 
 function KeyDown(Key)
 	if ATTACK == false then
-		if Key == "e" and VACUUM == false and FLIGHT == false and GRABBED == false then
+		if Key == "e" and VACUUM == false and FLIGHT == false then
 			Warp()
 		end
 		if Key == "z" and VACUUM == false and GRABBED == false then
