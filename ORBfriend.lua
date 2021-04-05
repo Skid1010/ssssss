@@ -1290,6 +1290,8 @@ while true do
 	ORB.Anchored = false
 end
 
+print("Enjoy, "..game.Players.LocalPlayer.Name..".")
+
 --//=================================\\
 --\\=================================//
 
