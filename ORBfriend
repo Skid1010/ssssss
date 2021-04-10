@@ -813,6 +813,17 @@ end)
 
 print(Class_Name.." loaded.")
 print("Enjoy, "..game.Players.LocalPlayer.Name..".")
+warn(
+[[Controls:
+
+	Key Controls:
+	E - Teleport
+	C - Grab
+	X - Suck in nearest
+
+	Message Controls:
+	Orb, play MUSICIDHERE
+	Orb, stop music]])
 
 local ORB = IT("Part",Weapon)
 ORB.CanCollide = false
