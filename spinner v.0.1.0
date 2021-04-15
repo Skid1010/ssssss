@@ -1,0 +1,276 @@
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Model0 = Instance.new("Model")
+Part1 = Instance.new("Part")
+Script2 = Instance.new("Script")
+Script3 = Instance.new("Script")
+Part4 = Instance.new("Part")
+BillboardGui5 = Instance.new("BillboardGui")
+TextLabel6 = Instance.new("TextLabel")
+Weld7 = Instance.new("Weld")
+Weld8 = Instance.new("Weld")
+Part9 = Instance.new("Part")
+Part10 = Instance.new("Part")
+UnionOperation11 = Instance.new("UnionOperation")
+Script12 = Instance.new("Script")
+Model0.Name = "spinner"
+Model0.Parent = mas
+Part1.Name = "TurnPlatform"
+Part1.Parent = Model0
+Part1.CFrame = CFrame.new(130.067139, 0.0967007875, -65.4780426, 0.996195078, 0, 0.0871515274, 0, 1, 0, -0.0871515274, 0, 0.996195197)
+Part1.Orientation = Vector3.new(0, 5, 0)
+Part1.Position = Vector3.new(130.067139, 0.0967007875, -65.4780426)
+Part1.Rotation = Vector3.new(0, 5, 0)
+Part1.Color = Color3.new(1, 0, 0)
+Part1.Size = Vector3.new(34.5, 1, 1)
+Part1.BottomSurface = Enum.SurfaceType.Smooth
+Part1.BrickColor = BrickColor.new("Really red")
+Part1.Material = Enum.Material.Neon
+Part1.TopSurface = Enum.SurfaceType.Smooth
+Part1.brickColor = BrickColor.new("Really red")
+Script2.Name = "TurningSpeedScript"
+Script2.Parent = Part1
+table.insert(cors,sandbox(Script2,function()
+_G.seed = 1
+
+while wait(math.huge) do
+	if _G.seed == 1 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.05,0)
+	elseif _G.seed == 2 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.06,0)
+	elseif _G.seed == 3 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.07,0)
+	elseif _G.seed == 4 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.08,0)
+	elseif _G.seed == 5 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.09,0)
+	elseif _G.seed == 6 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.1,0)
+	elseif _G.seed == 7 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.11,0)
+	elseif _G.seed == 8 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.12,0)
+	elseif _G.seed == 9 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.13,0)
+	elseif _G.seed == 10 then
+		script.Parent.CFrame = script.Parent.CFrame * CFrame.fromEulerAnglesXYZ(0,0.14,0)
+	end
+end
+end))
+Script3.Name = "LivesDebounce"
+Script3.Parent = Part1
+table.insert(cors,sandbox(Script3,function()
+local Debounce = false
+
+function onTouched(hit)
+if not Debounce then
+		if hit.Parent:findFirstChild("Humanoid") then
+			if script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: X" then
+				hit.Parent:findFirstChild("Humanoid").Health = 90
+				_G.seed = 2
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: IX"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: IX" then
+				hit.Parent:findFirstChild("Humanoid").Health = 80
+				_G.seed = 3
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: VIII"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: VIII" then
+				hit.Parent:findFirstChild("Humanoid").Health = 70
+				_G.seed = 4
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: VII"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: VII" then
+				hit.Parent:findFirstChild("Humanoid").Health = 60
+				_G.seed = 5
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: VI"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: VI" then
+				hit.Parent:findFirstChild("Humanoid").Health = 50
+				_G.seed = 6
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: V"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: V" then
+				hit.Parent:findFirstChild("Humanoid").Health = 40
+				_G.seed = 6
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: IV"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: IV" then
+				hit.Parent:findFirstChild("Humanoid").Health = 30
+				_G.seed = 7
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: III"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: III" then
+				hit.Parent:findFirstChild("Humanoid").Health = 20
+				_G.seed = 8
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: II"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: II" then
+				hit.Parent:findFirstChild("Humanoid").Health = 10
+				_G.seed = 9
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: I"
+			elseif script.Parent.Parent.Lives.BillboardGui.TextLabel.Text == "Lives: I" then
+				hit.Parent:findFirstChild("Humanoid").Health = 1
+				_G.seed = 0
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Game Over."
+				wait(5)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Huh, you're alive."
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Restarting..."
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Starting countdown until restart."
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "X"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "IX"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "VIII"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "VII"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "VI"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "V"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "IV"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "III"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "II"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "I"
+				wait(1)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Begin!"
+				wait(0.5)
+				script.Parent.Parent.Lives.BillboardGui.TextLabel.Text = "Lives: X"
+				_G.seed = 1
+			end
+		end
+Debounce = true
+wait(.5)           --Change cooldown here
+Debounce = false
+end
+end
+
+script.Parent.Touched:connect(onTouched)
+end))
+Part4.Name = "Lives"
+Part4.Parent = Model0
+Part4.CFrame = CFrame.new(130.067139, 0.0967007875, -65.4780426, 0.996195078, 0, 0.0871515274, 0, 1, 0, -0.0871515274, 0, 0.996195197)
+Part4.Orientation = Vector3.new(0, 5, 0)
+Part4.Position = Vector3.new(130.067139, 0.0967007875, -65.4780426)
+Part4.Rotation = Vector3.new(0, 5, 0)
+Part4.Color = Color3.new(1, 0, 0)
+Part4.Transparency = 1
+Part4.Size = Vector3.new(4, 0.0500000007, 1)
+Part4.Anchored = true
+Part4.BottomSurface = Enum.SurfaceType.Smooth
+Part4.BrickColor = BrickColor.new("Really red")
+Part4.Material = Enum.Material.Neon
+Part4.TopSurface = Enum.SurfaceType.Smooth
+Part4.brickColor = BrickColor.new("Really red")
+BillboardGui5.Parent = Part4
+BillboardGui5.LightInfluence = 1
+BillboardGui5.Size = UDim2.new(0, 200, 0, 200)
+BillboardGui5.Active = true
+BillboardGui5.ClipsDescendants = true
+BillboardGui5.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+BillboardGui5.AlwaysOnTop = true
+BillboardGui5.MaxDistance = 50
+TextLabel6.Parent = BillboardGui5
+TextLabel6.Size = UDim2.new(0, 200, 0, 50)
+TextLabel6.BackgroundColor = BrickColor.new("Institutional white")
+TextLabel6.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel6.BackgroundTransparency = 1
+TextLabel6.Font = Enum.Font.Arcade
+TextLabel6.FontSize = Enum.FontSize.Size14
+TextLabel6.Text = "Lives: X"
+TextLabel6.TextColor = BrickColor.new("Really black")
+TextLabel6.TextColor3 = Color3.new(0, 0, 0)
+TextLabel6.TextScaled = true
+TextLabel6.TextSize = 14
+TextLabel6.TextWrap = true
+TextLabel6.TextWrapped = true
+Weld7.Parent = Part4
+Weld7.Part0 = Part4
+Weld7.Part1 = Part1
+Weld7.part1 = Part1
+Weld8.Parent = Part4
+Weld8.Part0 = Part4
+Weld8.Part1 = Part9
+Weld8.part1 = Part9
+Part9.Name = "Ground"
+Part9.Parent = Model0
+Part9.CFrame = CFrame.new(130.25473, 0.0250005126, -65.6484299, 0, -0.996195078, 0.0871515274, 1, 0, 0, 0, 0.0871515274, 0.996195197)
+Part9.Orientation = Vector3.new(0, 5, 90)
+Part9.Position = Vector3.new(130.25473, 0.0250005126, -65.6484299)
+Part9.Rotation = Vector3.new(0, 5, 90)
+Part9.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part9.Size = Vector3.new(0.0500000007, 38.9280624, 38.3725243)
+Part9.Anchored = true
+Part9.BottomSurface = Enum.SurfaceType.Smooth
+Part9.BrickColor = BrickColor.new("Really black")
+Part9.CanCollide = false
+Part9.TopSurface = Enum.SurfaceType.Smooth
+Part9.brickColor = BrickColor.new("Really black")
+Part9.Shape = Enum.PartType.Cylinder
+Part10.Name = "Ceiling"
+Part10.Parent = Model0
+Part10.CFrame = CFrame.new(130.310669, 21.5352478, -65.0090866, 0, -0.996195078, 0.0871515274, 1, 0, 0, 0, 0.0871515274, 0.996195197)
+Part10.Orientation = Vector3.new(0, 5, 90)
+Part10.Position = Vector3.new(130.310669, 21.5352478, -65.0090866)
+Part10.Rotation = Vector3.new(0, 5, 90)
+Part10.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part10.Transparency = 1
+Part10.Size = Vector3.new(0.0500000007, 38.9280624, 38.3725243)
+Part10.Anchored = true
+Part10.BottomSurface = Enum.SurfaceType.Smooth
+Part10.BrickColor = BrickColor.new("Really black")
+Part10.TopSurface = Enum.SurfaceType.Smooth
+Part10.brickColor = BrickColor.new("Really black")
+Part10.Shape = Enum.PartType.Cylinder
+UnionOperation11.Name = "Walls"
+UnionOperation11.Parent = Model0
+UnionOperation11.CFrame = CFrame.new(130.219284, 10.6328163, -65.5893707, -0.500004232, 0, 0.866022944, 0, 1, 0, -0.866022944, 0, -0.500004232)
+UnionOperation11.Orientation = Vector3.new(0, 120, 0)
+UnionOperation11.Position = Vector3.new(130.219284, 10.6328163, -65.5893707)
+UnionOperation11.Rotation = Vector3.new(-180, 60, -180)
+UnionOperation11.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+UnionOperation11.Transparency = 1
+UnionOperation11.Size = Vector3.new(38.0588455, 21.165638, 38.1320343)
+UnionOperation11.Anchored = true
+UnionOperation11.BrickColor = BrickColor.new("Really black")
+UnionOperation11.Material = Enum.Material.Glass
+UnionOperation11.brickColor = BrickColor.new("Really black")
+Script12.Name = "WallsScript"
+Script12.Parent = UnionOperation11
+table.insert(cors,sandbox(Script12,function()
+_G.walls = false
+
+
+if _G.walls == true then
+	script.Parent.CanCollide = true
+	script.Parent.Transparency = 0.5
+elseif _G.walls == false then
+	script.Parent.CanCollide = false
+	script.Parent.Transparency = 1
+end
+
+end))
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = workspace
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
