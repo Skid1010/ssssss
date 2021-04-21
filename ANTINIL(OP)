@@ -1,11 +1,11 @@
 game.Players.CraftyAlphaMan.CharacterAdded:Connect(function(character)
-    character:WaitForChild("Humanoid").Died:Connect(function()
-        local a = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.X
-        local b = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Y
-        local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
-        game.Players.LocalPlayer:LoadCharacter()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(a, b, c))
-    end)
+	character:WaitForChild("Humanoid").Died:Connect(function()
+		local a = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.X
+		local b = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Y
+		local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
+		game.Players.LocalPlayer:LoadCharacter()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(a, b, c))
+	end)
 end)
 
 fixing = false
@@ -16,17 +16,15 @@ function fixchar()
 	local b = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Y
 	local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
 	game.Players.CraftyAlphaMan:LoadCharacter()
-    fire:FireClient()
-    wait(1)
+	wait(1)
 	fixing = false
 end
 
 game.Workspace.DescendantRemoving:Connect(function(v)
-    if v == game.Players.CraftyAlphaMan.Character or v:IsDescendantOf(game.Players.CraftyAlphaMan.Character) then
-        if fixing == false then
-        fixchar()
-        end
-    end
+	if v == game.Players.CraftyAlphaMan.Character or v:IsDescendantOf(game.Players.CraftyAlphaMan.Character) then
+		if fixing == false then
+			fixchar()
+		end
+	end
 end)
-
 print("If this doesn't work, make sure you actually edited it so your name is there as this script does not work with FE Compatible code to support localplayer")
