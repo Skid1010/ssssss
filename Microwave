@@ -1,5 +1,5 @@
---Made by CraftyAlphaMan
---Converted with ttyyuu12345's model to script plugin v4
+--made by crafty yessur
+--convered with ttyyu guy m2s idk
 function sandbox(var,func)
 	local env = getfenv(func)
 	local newenv = setmetatable({},{
@@ -155,10 +155,10 @@ Part13.Material = Enum.Material.Metal
 Part13.TopSurface = Enum.SurfaceType.Smooth
 Part14.Name = "Chicken"
 Part14.Parent = Model1
-Part14.CFrame = CFrame.new(-3.74688244, 2.42611694, -19.3121223, -0.813952029, -0.453990698, 0.362457722, -0.406783611, -2.65240669e-05, -0.913524508, 0.414740503, -0.891009331, -0.18465583)
-Part14.Orientation = Vector3.new(66, 117, -90)
-Part14.Position = Vector3.new(-3.74688244, 2.42611694, -19.3121223)
-Part14.Rotation = Vector3.new(101.43, 21.25, 150.850006)
+Part14.CFrame = CFrame.new(-3.74688244, 2.4261167, -19.3121223, 4.37114167e-08, -0.499999911, 0.866025448, -1, -2.18556622e-08, 3.78551768e-08, 1.24344979e-14, -0.866025448, -0.499999911)
+Part14.Orientation = Vector3.new(0, 120, -90)
+Part14.Position = Vector3.new(-3.74688244, 2.4261167, -19.3121223)
+Part14.Rotation = Vector3.new(-180, 60, 90)
 Part14.Color = Color3.new(0.803922, 0.803922, 0.803922)
 Part14.Size = Vector3.new(0.666471362, 0.784817338, 0.683615923)
 Part14.Anchored = true
@@ -219,6 +219,7 @@ Stop.ClickDetector.MouseClick:connect(function()
 		Light.Enabled = false
 		MicrowavingSound:Stop()
 		BeepSound:Play()
+		_G.spunning = false
 	end
 end)
 end))
@@ -260,18 +261,22 @@ local Light = workspace.MicrowaveA.Microwave.StartStopLight.Light.PointLight
 local Start = workspace.MicrowaveA.Microwave.StartStopLight.Start
 local MicrowavingSound = workspace.MicrowaveA.Microwave.Mmm
 local BeepSound = workspace.MicrowaveA.Microwave.Beep
+local chicken = script.Parent.Parent.Parent.Chicken
 
+_G.spunning = false
 Start.ClickDetector.MouseClick:connect(function()
 	if Light.Enabled == false then
+		_G.spunning = true
 		Light.Enabled = true
 		BeepSound:Stop()
 		MicrowavingSound:Play()
+		repeat wait(0.02999) chicken.CFrame = chicken.CFrame * CFrame.fromEulerAnglesXYZ(0.1,0,0) until _G.spunning == false
 	end
 end)
 end))
 Part27.Name = "Light"
 Part27.Parent = Model16
-Part27.CFrame = CFrame.new(-3.02950573, 2.78551388, -19.4409256, 0, -1, 0, 1, 0, 0, 0, 0, 1)
+Part27.CFrame = CFrame.new(-3.02950573, 2.78551388, -19.4409256, 0, -1, 0, 1, 0, -0, 0, 0, 1)
 Part27.Orientation = Vector3.new(0, 0, 90)
 Part27.Position = Vector3.new(-3.02950573, 2.78551388, -19.4409256)
 Part27.Rotation = Vector3.new(0, 0, 90)
