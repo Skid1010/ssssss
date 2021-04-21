@@ -1,4 +1,3 @@
-
 game.Players.supergod800.CharacterAdded:Connect(function(character)
-        character:FindFirstChildWhichIsA("Humanoid").Name = "lamegodnegative800"
-     end)
+	character:FindFirstChildWhichIsA("Humanoid").Name = "lamegodnegative800"
+end)
