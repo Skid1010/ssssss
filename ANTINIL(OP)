@@ -1,0 +1,28 @@
+game.Players.CraftyAlphaMan.CharacterAdded:Connect(function(character)
+    character:WaitForChild("Humanoid").Died:Connect(function()
+        local a = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.X
+        local b = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Y
+        local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
+        game.Players.CraftyAlphaMan:LoadCharacter()
+        game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(a, b, c))
+    end)
+end)
+
+fixing = false
+function fixchar()
+    fixing = true
+    local a = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.X
+    local b = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Y
+    local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
+    game.Players.CraftyAlphaMan:LoadCharacter()
+    game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(a, b, c))
+    fixing = false
+end
+
+game.Workspace.DescendantRemoving:Connect(function(v)
+    if v == game.Players.CraftyAlphaMan.Character or v:IsDescendantOf(game.Players.CraftyAlphaMan.Character) then
+        if fixing == false then
+        fixchar()
+        end
+    end
+end)
