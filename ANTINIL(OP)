@@ -10,13 +10,15 @@ end)
 
 fixing = false
 function fixchar()
-    fixing = true
-    local a = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.X
-    local b = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Y
-    local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
-    game.Players.LocalPlayer:LoadCharacter()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(a, b, c))
-    fixing = false
+	fixing = true
+	local camerapos = workspace.CurrentCamera.CFrame
+	local a = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.X
+	local b = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Y
+	local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
+	game.Players.CraftyAlphaMan:LoadCharacter()
+    fire:FireClient()
+    wait(1)
+	fixing = false
 end
 
 game.Workspace.DescendantRemoving:Connect(function(v)
@@ -27,4 +29,4 @@ game.Workspace.DescendantRemoving:Connect(function(v)
     end
 end)
 
-print("invincible :p")
+print("If this doesn't work, make sure you actually edited it so your name is there as this script does not work with FE Compatible code to support localplayer")
