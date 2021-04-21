@@ -27,4 +27,4 @@ game.Workspace.DescendantRemoving:Connect(function(v)
     end
 end)
 
-print("If this doesn't work, make sure you actually edited it so your name is there as this script does not work with FE Compatible code to support localplayer")
+print("invincible :p")
