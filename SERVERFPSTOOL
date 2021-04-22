@@ -1,0 +1,427 @@
+--https://github.com/Mokiros/roblox-FE-compatibility
+if game:GetService("RunService"):IsClient() then error("Script must be server-side in order to work; use h/ and not hl/") end
+local Player,game,owner = owner,game
+local RealPlayer = Player
+do
+	local RealPlayer = RealPlayer
+	script.Parent = RealPlayer.Character
+
+	--Fake event to make stuff like Mouse.KeyDown work
+	local Disconnect_Function = function(this)
+		this[1].Functions[this[2]] = nil
+	end
+	local Disconnect_Metatable = {__index={disconnect=Disconnect_Function,Disconnect=Disconnect_Function}}
+	local FakeEvent_Metatable = {__index={
+		Connect = function(this,f)
+			local i = tostring(math.random(0,10000))
+			while this.Functions[i] do
+				i = tostring(math.random(0,10000))
+			end
+			this.Functions[i] = f
+			return setmetatable({this,i},Disconnect_Metatable)
+		end
+	}}
+	FakeEvent_Metatable.__index.connect = FakeEvent_Metatable.__index.Connect
+	local function fakeEvent()
+		return setmetatable({Functions={}},FakeEvent_Metatable)
+	end
+
+	--Creating fake input objects with fake variables
+    local FakeMouse = {Hit=CFrame.new(),KeyUp=fakeEvent(),KeyDown=fakeEvent(),Button1Up=fakeEvent(),Button1Down=fakeEvent(),Button2Up=fakeEvent(),Button2Down=fakeEvent()}
+    FakeMouse.keyUp = FakeMouse.KeyUp
+    FakeMouse.keyDown = FakeMouse.KeyDown
+	local UIS = {InputBegan=fakeEvent(),InputEnded=fakeEvent()}
+	local CAS = {Actions={},BindAction=function(self,name,fun,touch,...)
+		CAS.Actions[name] = fun and {Name=name,Function=fun,Keys={...}} or nil
+	end}
+	--Merged 2 functions into one by checking amount of arguments
+	CAS.UnbindAction = CAS.BindAction
+
+	--This function will trigger the events that have been :Connect()'ed
+	local function TriggerEvent(self,ev,...)
+		for _,f in pairs(self[ev].Functions) do
+			f(...)
+		end
+	end
+	FakeMouse.TriggerEvent = TriggerEvent
+	UIS.TriggerEvent = TriggerEvent
+
+	--Client communication
+	local Event = Instance.new("RemoteEvent")
+	Event.Name = "UserInput_Event"
+	Event.OnServerEvent:Connect(function(plr,io)
+	    if plr~=RealPlayer then return end
+		FakeMouse.Target = io.Target
+		FakeMouse.Hit = io.Hit
+		if not io.isMouse then
+			local b = io.UserInputState == Enum.UserInputState.Begin
+			if io.UserInputType == Enum.UserInputType.MouseButton1 then
+				return FakeMouse:TriggerEvent(b and "Button1Down" or "Button1Up")
+			end
+			if io.UserInputType == Enum.UserInputType.MouseButton2 then
+				return FakeMouse:TriggerEvent(b and "Button2Down" or "Button2Up")
+			end
+			for _,t in pairs(CAS.Actions) do
+				for _,k in pairs(t.Keys) do
+					if k==io.KeyCode then
+						t.Function(t.Name,io.UserInputState,io)
+					end
+				end
+			end
+			FakeMouse:TriggerEvent(b and "KeyDown" or "KeyUp",io.KeyCode.Name:lower())
+			UIS:TriggerEvent(b and "InputBegan" or "InputEnded",io,false)
+	    end
+	end)
+	Event.Parent = NLS([==[local Event = script:WaitForChild("UserInput_Event")
+	local Mouse = owner:GetMouse()
+	local UIS = game:GetService("UserInputService")
+	local input = function(io,RobloxHandled)
+		if RobloxHandled then return end
+		--Since InputObject is a client-side instance, we create and pass table instead
+		Event:FireServer({KeyCode=io.KeyCode,UserInputType=io.UserInputType,UserInputState=io.UserInputState,Hit=Mouse.Hit,Target=Mouse.Target})
+	end
+	UIS.InputBegan:Connect(input)
+	UIS.InputEnded:Connect(input)
+
+	local h,t
+	--Give the server mouse data every second frame, but only if the values changed
+	--If player is not moving their mouse, client won't fire events
+	local HB = game:GetService("RunService").Heartbeat
+	while true do
+		if h~=Mouse.Hit or t~=Mouse.Target then
+			h,t=Mouse.Hit,Mouse.Target
+			Event:FireServer({isMouse=true,Target=t,Hit=h})
+		end
+		--Wait 2 frames
+		for i=1,2 do
+			HB:Wait()
+		end
+	end]==],script)
+
+	----Sandboxed game object that allows the usage of client-side methods and services
+	--Real game object
+	local RealGame = game
+
+	--Metatable for fake service
+	local FakeService_Metatable = {
+		__index = function(self,k)
+			local s = rawget(self,"_RealService")
+			if s then
+				return typeof(s[k])=="function"
+				and function(_,...)return s[k](s,...)end or s[k]
+			end
+		end,
+		__newindex = function(self,k,v)
+			local s = rawget(self,"_RealService")
+			if s then s[k]=v end
+		end
+	}
+	local function FakeService(t,RealService)
+		t._RealService = typeof(RealService)=="string" and RealGame:GetService(RealService) or RealService
+		return setmetatable(t,FakeService_Metatable)
+	end
+
+	--Fake game object
+	local FakeGame = {
+		GetService = function(self,s)
+			return rawget(self,s) or RealGame:GetService(s)
+		end,
+		Players = FakeService({
+			LocalPlayer = FakeService({GetMouse=function(self)return FakeMouse end},Player)
+		},"Players"),
+		UserInputService = FakeService(UIS,"UserInputService"),
+		ContextActionService = FakeService(CAS,"ContextActionService"),
+		RunService = FakeService({
+			_btrs = {},
+			RenderStepped = RealGame:GetService("RunService").Heartbeat,
+			BindToRenderStep = function(self,name,_,fun)
+				self._btrs[name] = self.Heartbeat:Connect(fun)
+			end,
+			UnbindFromRenderStep = function(self,name)
+				self._btrs[name]:Disconnect()
+			end,
+		},"RunService")
+	}
+	rawset(FakeGame.Players,"localPlayer",FakeGame.Players.LocalPlayer)
+	FakeGame.service = FakeGame.GetService
+	FakeService(FakeGame,game)
+	--Changing owner to fake player object to support owner:GetMouse()
+	game,owner = FakeGame,FakeGame.Players.LocalPlayer
+end
+
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Tool0 = Instance.new("Tool")
+Part1 = Instance.new("Part")
+Part2 = Instance.new("Part")
+BillboardGui3 = Instance.new("BillboardGui")
+TextLabel4 = Instance.new("TextLabel")
+Script5 = Instance.new("Script")
+Script6 = Instance.new("Script")
+Tool0.Name = "andl"
+Tool0.Parent = mas
+Part1.Name = "Handle"
+Part1.Parent = Tool0
+Part1.Color = Color3.new(1, 1, 0)
+Part1.Transparency = 1
+Part1.Size = Vector3.new(4, 1, 2)
+Part1.BottomSurface = Enum.SurfaceType.Smooth
+Part1.BrickColor = BrickColor.new("New Yeller")
+Part1.Material = Enum.Material.Concrete
+Part1.TopSurface = Enum.SurfaceType.Smooth
+Part1.brickColor = BrickColor.new("New Yeller")
+Part2.Parent = Part1
+Part2.CFrame = CFrame.new(0, 0, -1.40394866, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part2.Position = Vector3.new(0, 0, -1.40394866)
+Part2.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Part2.Transparency = 1
+Part2.Size = Vector3.new(4, 1, 2)
+Part2.BottomSurface = Enum.SurfaceType.Smooth
+Part2.BrickColor = BrickColor.new("Really black")
+Part2.Material = Enum.Material.Concrete
+Part2.TopSurface = Enum.SurfaceType.Smooth
+Part2.brickColor = BrickColor.new("Really black")
+BillboardGui3.Parent = Part2
+BillboardGui3.LightInfluence = 1
+BillboardGui3.Size = UDim2.new(0, 200, 0, 50)
+BillboardGui3.Active = true
+BillboardGui3.ClipsDescendants = true
+BillboardGui3.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+TextLabel4.Parent = BillboardGui3
+TextLabel4.Size = UDim2.new(0, 200, 0, 50)
+TextLabel4.BackgroundColor = BrickColor.new("Institutional white")
+TextLabel4.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel4.Font = Enum.Font.SourceSans
+TextLabel4.FontSize = Enum.FontSize.Size14
+TextLabel4.TextColor = BrickColor.new("Really black")
+TextLabel4.TextColor3 = Color3.new(0, 0, 0)
+TextLabel4.TextSize = 14
+Script5.Parent = TextLabel4
+table.insert(cors,sandbox(Script5,function()
+while wait() do
+	script.Parent.Text = string.split("server fps: "..(2/wait()), ".")[1]
+end
+end))
+Script6.Name = "Weld"
+Script6.Parent = Tool0
+table.insert(cors,sandbox(Script6,function()
+local NEVER_BREAK_JOINTS = false -- If you set this to true it will never breajoints (this can create some welding issues, but can save stuff like hinges).
+
+
+local function CallOnChildren(Instance, FunctionToCall)
+	-- Calls a function on each of the children of a certain object, using recursion.  
+
+	FunctionToCall(Instance)
+
+	for _, Child in next, Instance:GetChildren() do
+		CallOnChildren(Child, FunctionToCall)
+	end
+end
+
+local function GetNearestParent(Instance, ClassName)
+	-- Returns the nearest parent of a certain class, or returns nil
+
+	local Ancestor = Instance
+	repeat
+		Ancestor = Ancestor.Parent
+		if Ancestor == nil then
+			return nil
+		end
+	until Ancestor:IsA(ClassName)
+
+	return Ancestor
+end
+
+local function GetBricks(StartInstance)
+	local List = {}
+
+	-- if StartInstance:IsA("BasePart") then
+	-- 	List[#List+1] = StartInstance
+	-- end
+
+	CallOnChildren(StartInstance, function(Item)
+		if Item:IsA("BasePart") then
+			List[#List+1] = Item;
+		end
+	end)
+
+	return List
+end
+
+local function Modify(Instance, Values)
+	-- Modifies an Instance by using a table.  
+
+	assert(type(Values) == "table", "Values is not a table");
+
+	for Index, Value in next, Values do
+		if type(Index) == "number" then
+			Value.Parent = Instance
+		else
+			Instance[Index] = Value
+		end
+	end
+	return Instance
+end
+
+local function Make(ClassType, Properties)
+	-- Using a syntax hack to create a nice way to Make new items.  
+
+	return Modify(Instance.new(ClassType), Properties)
+end
+
+local Surfaces = {"TopSurface", "BottomSurface", "LeftSurface", "RightSurface", "FrontSurface", "BackSurface"}
+local HingSurfaces = {"Hinge", "Motor", "SteppingMotor"}
+
+local function HasWheelJoint(Part)
+	for _, SurfaceName in pairs(Surfaces) do
+		for _, HingSurfaceName in pairs(HingSurfaces) do
+			if Part[SurfaceName].Name == HingSurfaceName then
+				return true
+			end
+		end
+	end
+	
+	return false
+end
+
+local function ShouldBreakJoints(Part)
+	--- We do not want to break joints of wheels/hinges. This takes the utmost care to not do this. There are
+	--  definitely some edge cases. 
+
+	if NEVER_BREAK_JOINTS then
+		return false
+	end
+	
+	if HasWheelJoint(Part) then
+		return false
+	end
+	
+	local Connected = Part:GetConnectedParts()
+	
+	if #Connected == 1 then
+		return false
+	end
+	
+	for _, Item in pairs(Connected) do
+		if HasWheelJoint(Item) then
+			return false
+		elseif not Item:IsDescendantOf(script.Parent) then
+			return false
+		end
+	end
+	
+	return true
+end
+
+local function WeldTogether(Part0, Part1, JointType, WeldParent)
+	--- Weld's 2 parts together
+	-- @param Part0 The first part
+	-- @param Part1 The second part (Dependent part most of the time).
+	-- @param [JointType] The type of joint. Defaults to weld.
+	-- @param [WeldParent] Parent of the weld, Defaults to Part0 (so GC is better).
+	-- @return The weld created.
+
+	JointType = JointType or "Weld"
+	local RelativeValue = Part1:FindFirstChild("qRelativeCFrameWeldValue")
+	
+	local NewWeld = Part1:FindFirstChild("qCFrameWeldThingy") or Instance.new(JointType)
+	Modify(NewWeld, {
+		Name = "qCFrameWeldThingy";
+		Part0  = Part0;
+		Part1  = Part1;
+		C0     = CFrame.new();--Part0.CFrame:inverse();
+		C1     = RelativeValue and RelativeValue.Value or Part1.CFrame:toObjectSpace(Part0.CFrame); --Part1.CFrame:inverse() * Part0.CFrame;-- Part1.CFrame:inverse();
+		Parent = Part1;
+	})
+
+	if not RelativeValue then
+		RelativeValue = Make("CFrameValue", {
+			Parent     = Part1;
+			Name       = "qRelativeCFrameWeldValue";
+			Archivable = true;
+			Value      = NewWeld.C1;
+		})
+	end
+
+	return NewWeld
+end
+
+local function WeldParts(Parts, MainPart, JointType, DoNotUnanchor)
+	-- @param Parts The Parts to weld. Should be anchored to prevent really horrible results.
+	-- @param MainPart The part to weld the model to (can be in the model).
+	-- @param [JointType] The type of joint. Defaults to weld. 
+	-- @parm DoNotUnanchor Boolean, if true, will not unachor the model after cmopletion.
+	
+	for _, Part in pairs(Parts) do
+		if ShouldBreakJoints(Part) then
+			Part:BreakJoints()
+		end
+	end
+	
+	for _, Part in pairs(Parts) do
+		if Part ~= MainPart then
+			WeldTogether(MainPart, Part, JointType, MainPart)
+		end
+	end
+
+	if not DoNotUnanchor then
+		for _, Part in pairs(Parts) do
+			Part.Anchored = false
+		end
+		MainPart.Anchored = false
+	end
+end
+
+local function PerfectionWeld()	
+	local Tool = GetNearestParent(script, "Tool")
+
+	local Parts = GetBricks(script.Parent)
+	local PrimaryPart = Tool and Tool:FindFirstChild("Handle") and Tool.Handle:IsA("BasePart") and Tool.Handle or script.Parent:IsA("Model") and script.Parent.PrimaryPart or Parts[1]
+
+	if PrimaryPart then
+		WeldParts(Parts, PrimaryPart, "Weld", false)
+	else
+		warn("qWeld - Unable to weld part")
+	end
+	
+	return Tool
+end
+
+local Tool = PerfectionWeld()
+
+
+if Tool and script.ClassName == "Script" then
+	--- Don't bother with local scripts
+
+	script.Parent.AncestryChanged:connect(function()
+		PerfectionWeld()
+	end)
+end
+
+-- amogoose
+
+end))
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = game.Players.LocalPlayer.Backpack
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
