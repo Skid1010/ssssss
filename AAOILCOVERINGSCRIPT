@@ -1,0 +1,13 @@
+	for i,v in pairs(game.Players.CraftyAlphaMan.Character:GetDescendants()) do
+		if v:IsA("MeshPart") or v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("FlagStand") then
+			local g = Instance.new("Part",c)
+			g.Size = v.Size + Vector3.new(.1,.1,.1)
+			g.Transparency = .7
+			g.Color = Color3.fromRGB(228, 253, 0)
+			g.Material = "SmoothPlastic"
+			g.CanCollide = false
+			local w = Instance.new("Weld",g)
+			w.Part0 = g w.Part1 = v
+        end
+    end
+end
