@@ -10,4 +10,3 @@
 			w.Part0 = g w.Part1 = v
         end
     end
-end
