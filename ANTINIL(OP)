@@ -5,7 +5,7 @@ game.Players.CraftyAlphaMan.CharacterAdded:Connect(function(character)
 		local c = game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame.Z
 		game.Players.CraftyAlphaMan:LoadCharacter()
 		game.Players.CraftyAlphaMan.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(a, b, c))
-		local speaker = game.Players.LocalPlayer
+		local speaker = game.Players.CraftyAlphaMan
 		workspace.CurrentCamera.CameraSubject = speaker.Character:FindFirstChildWhichIsA('Humanoid')
 		workspace.CurrentCamera.CameraType = "Custom"
 		speaker.CameraMinZoomDistance = 0.5
