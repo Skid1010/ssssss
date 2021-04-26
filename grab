@@ -159,7 +159,7 @@ Holding = false
 
 m.Button1Down:Connect(function()
 	if Holding == false then
-		if m.Target ~= nil and m.Target.ClassName == "Part" and m.Target.Material ~= Enum.Material.Grass and m.Target.Name ~= "Base" and m.Target.Name ~= "Baseplate" then
+		if m.Target ~= nil and m.Target.ClassName == "Part" then
 			Holding = true
 			Target = m.Target
 			Target.Anchored = true
