@@ -2,64 +2,64 @@ if game:GetService("RunService"):IsClient() then error("Script must be server-si
 local Player,game,owner = owner,game
 local RealPlayer = Player
 do
-    print("Loading..")
-    print("Loaded, enjoy.")
-    local rp = RealPlayer
-    script.Parent = rp.Character
-   
-    --RemoteEvent for communicating
-    local Event = Instance.new("RemoteEvent")
-    Event.Name = "UserInput_Event"
- 
-    --Fake event to make stuff like Mouse.KeyDown work
-    local function fakeEvent()
-        local t = {_fakeEvent=true,Functions={},Connect=function(self,f)table.insert(self.Functions,f) end}
-        t.connect = t.Connect
-        return t
-    end
- 
-    --Creating fake input objects with fake variables
-    local m = {Target=nil,Hit=CFrame.new(),KeyUp=fakeEvent(),KeyDown=fakeEvent(),Button1Up=fakeEvent(),Button1Down=fakeEvent()}
-    local UIS = {InputBegan=fakeEvent(),InputEnded=fakeEvent()}
-    local CAS = {Actions={},BindAction=function(self,name,fun,touch,...)
-        CAS.Actions[name] = fun and {Name=name,Function=fun,Keys={...}} or nil
-    end}
-    --Merged 2 functions into one by checking amount of arguments
-    CAS.UnbindAction = CAS.BindAction
- 
-    --This function will trigger the events that have been :Connect()'ed
-    local function te(self,ev,...)
-        local t = m[ev]
-        if t and t._fakeEvent then
-            for _,f in pairs(t.Functions) do
-                f(...)
-            end
-        end
-    end
-    m.TrigEvent = te
-    UIS.TrigEvent = te
- 
-    Event.OnServerEvent:Connect(function(plr,io)
-        if plr~=rp then return end
-        m.Target = io.Target
-        m.Hit = io.Hit
-        if not io.isMouse then
-            local b = io.UserInputState == Enum.UserInputState.Begin
-            if io.UserInputType == Enum.UserInputType.MouseButton1 then
-                return m:TrigEvent(b and "Button1Down" or "Button1Up")
-            end
-            for _,t in pairs(CAS.Actions) do
-                for _,k in pairs(t.Keys) do
-                    if k==io.KeyCode then
-                        t.Function(t.Name,io.UserInputState,io)
-                    end
-                end
-            end
-            m:TrigEvent(b and "KeyDown" or "KeyUp",io.KeyCode.Name:lower())
-            UIS:TrigEvent(b and "InputBegan" or "InputEnded",io,false)
-        end
-    end)
-    Event.Parent = NLS([==[
+	print("Loading..")
+	print("Loaded, enjoy.")
+	local rp = RealPlayer
+	script.Parent = rp.Character
+
+	--RemoteEvent for communicating
+	local Event = Instance.new("RemoteEvent")
+	Event.Name = "UserInput_Event"
+
+	--Fake event to make stuff like Mouse.KeyDown work
+	local function fakeEvent()
+		local t = {_fakeEvent=true,Functions={},Connect=function(self,f)table.insert(self.Functions,f) end}
+		t.connect = t.Connect
+		return t
+	end
+
+	--Creating fake input objects with fake variables
+	local m = {Target=nil,Hit=CFrame.new(),KeyUp=fakeEvent(),KeyDown=fakeEvent(),Button1Up=fakeEvent(),Button1Down=fakeEvent()}
+	local UIS = {InputBegan=fakeEvent(),InputEnded=fakeEvent()}
+	local CAS = {Actions={},BindAction=function(self,name,fun,touch,...)
+		CAS.Actions[name] = fun and {Name=name,Function=fun,Keys={...}} or nil
+	end}
+	--Merged 2 functions into one by checking amount of arguments
+	CAS.UnbindAction = CAS.BindAction
+
+	--This function will trigger the events that have been :Connect()'ed
+	local function te(self,ev,...)
+		local t = m[ev]
+		if t and t._fakeEvent then
+			for _,f in pairs(t.Functions) do
+				f(...)
+			end
+		end
+	end
+	m.TrigEvent = te
+	UIS.TrigEvent = te
+
+	Event.OnServerEvent:Connect(function(plr,io)
+		if plr~=rp then return end
+		m.Target = io.Target
+		m.Hit = io.Hit
+		if not io.isMouse then
+			local b = io.UserInputState == Enum.UserInputState.Begin
+			if io.UserInputType == Enum.UserInputType.MouseButton1 then
+				return m:TrigEvent(b and "Button1Down" or "Button1Up")
+			end
+			for _,t in pairs(CAS.Actions) do
+				for _,k in pairs(t.Keys) do
+					if k==io.KeyCode then
+						t.Function(t.Name,io.UserInputState,io)
+					end
+				end
+			end
+			m:TrigEvent(b and "KeyDown" or "KeyUp",io.KeyCode.Name:lower())
+			UIS:TrigEvent(b and "InputBegan" or "InputEnded",io,false)
+		end
+	end)
+	Event.Parent = NLS([==[
     local Player = game:GetService("Players").LocalPlayer
     local Event = script:WaitForChild("UserInput_Event")
  
@@ -82,65 +82,65 @@ do
             Event:FireServer({isMouse=true,Target=t,Hit=h})
         end
     end]==],Player.Character)
- 
-    ----Sandboxed game object that allows the usage of client-side methods and services
-    --Real game object
-    local _rg = game
- 
-    --Metatable for fake service
-    local fsmt = {
-        __index = function(self,k)
-            local s = rawget(self,"_RealService")
-            if s then return s[k] end
-        end,
-        __newindex = function(self,k,v)
-            local s = rawget(self,"_RealService")
-            if s then s[k]=v end
-        end,
-        __call = function(self,...)
-            local s = rawget(self,"_RealService")
-            if s then return s(...) end
-        end
-    }
-    local function FakeService(t,RealService)
-        t._RealService = typeof(RealService)=="string" and _rg:GetService(RealService) or RealService
-        return setmetatable(t,fsmt)
-    end
- 
-    --Fake game object
-    local g = {
-        GetService = function(self,s)
-            return self[s]
-        end,
-        Players = FakeService({
-            LocalPlayer = FakeService({GetMouse=function(self)return m end},Player)
-        },"Players"),
-        UserInputService = FakeService(UIS,"UserInputService"),
-        ContextActionService = FakeService(CAS,"ContextActionService"),
-    }
-    rawset(g.Players,"localPlayer",g.Players.LocalPlayer)
-    g.service = g.GetService
-   
-    g.RunService = FakeService({
-        RenderStepped = _rg:GetService("RunService").Heartbeat,
-        BindToRenderStep = function(self,name,_,fun)
-            self._btrs[name] = self.Heartbeat:Connect(fun)
-        end,
-        UnbindFromRenderStep = function(self,name)
-            self._btrs[name]:Disconnect()
-        end,
-    },"RunService")
- 
-    setmetatable(g,{
-        __index=function(self,s)
-            return _rg:GetService(s) or typeof(_rg[s])=="function"
-            and function(_,...)return _rg[s](_rg,...)end or _rg[s]
-        end,
-        __newindex = fsmt.__newindex,
-        __call = fsmt.__call
-    })
-    --Changing owner to fake player object to support owner:GetMouse()
-    game,owner = g,g.Players.LocalPlayer
+
+	----Sandboxed game object that allows the usage of client-side methods and services
+	--Real game object
+	local _rg = game
+
+	--Metatable for fake service
+	local fsmt = {
+		__index = function(self,k)
+			local s = rawget(self,"_RealService")
+			if s then return s[k] end
+		end,
+		__newindex = function(self,k,v)
+			local s = rawget(self,"_RealService")
+			if s then s[k]=v end
+		end,
+		__call = function(self,...)
+			local s = rawget(self,"_RealService")
+			if s then return s(...) end
+		end
+	}
+	local function FakeService(t,RealService)
+		t._RealService = typeof(RealService)=="string" and _rg:GetService(RealService) or RealService
+		return setmetatable(t,fsmt)
+	end
+
+	--Fake game object
+	local g = {
+		GetService = function(self,s)
+			return self[s]
+		end,
+		Players = FakeService({
+			LocalPlayer = FakeService({GetMouse=function(self)return m end},Player)
+		},"Players"),
+		UserInputService = FakeService(UIS,"UserInputService"),
+		ContextActionService = FakeService(CAS,"ContextActionService"),
+	}
+	rawset(g.Players,"localPlayer",g.Players.LocalPlayer)
+	g.service = g.GetService
+
+	g.RunService = FakeService({
+		RenderStepped = _rg:GetService("RunService").Heartbeat,
+		BindToRenderStep = function(self,name,_,fun)
+			self._btrs[name] = self.Heartbeat:Connect(fun)
+		end,
+		UnbindFromRenderStep = function(self,name)
+			self._btrs[name]:Disconnect()
+		end,
+	},"RunService")
+
+	setmetatable(g,{
+		__index=function(self,s)
+			return _rg:GetService(s) or typeof(_rg[s])=="function"
+				and function(_,...)return _rg[s](_rg,...)end or _rg[s]
+		end,
+		__newindex = fsmt.__newindex,
+		__call = fsmt.__call
+	})
+	--Changing owner to fake player object to support owner:GetMouse()
+	game,owner = g,g.Players.LocalPlayer
 end
 
 local playerAA = game.Players.LocalPlayer
@@ -193,6 +193,7 @@ ASIN = math.asin
 ABS = math.abs
 MRANDOM = math.random
 FLOOR = math.floor
+ANCHORING = false
 
 function CreateMesh(MESH, PARENT, MESHTYPE, MESHID, TEXTUREID, SCALE, OFFSET)
 	local NEWMESH = IT(MESH)
@@ -918,413 +919,425 @@ function Draw()
 	end
 end
 
-		function StartFlight()
-			Rooted = true
-			CUSTOMMOVEMENT = true
-			grav.position = RootPart.Position
-			Swait(50)
-			grav.P = 500
-			CreateSound(PEWSOUND[MRANDOM(1, #PEWSOUND)], ORB, 2, MRANDOM(8, 9) / 10,false)
-			for i = 1, 10 do
-				Swait()
-				X = X - 1
-				Y = X
-				Z = X
+function StartFlight()
+	Rooted = true
+	CUSTOMMOVEMENT = true
+	grav.position = RootPart.Position
+	Swait(50)
+	grav.P = 500
+	CreateSound(PEWSOUND[MRANDOM(1, #PEWSOUND)], ORB, 2, MRANDOM(8, 9) / 10,false)
+	for i = 1, 10 do
+		Swait()
+		X = X - 1
+		Y = X
+		Z = X
+	end
+	local weld = weldBetween(Torso,ORB)
+	repeat
+		Swait()
+		grav.position = Mouse.Hit.p
+		turnto(Mouse.Hit.p,RootPart)
+	until FLIGHT == false
+	grav.P = 20000
+	CUSTOMMOVEMENT = false
+	weld:remove()
+	for i = 1, 10 do
+		Swait()
+		X = X + 1
+		Y = X
+		Z = X
+	end
+	Rooted = false
+end
+
+function succnearest(position,range,force,doesbreak)
+	for i,v in ipairs(workspace:GetChildren()) do
+		local body = v:GetChildren()
+		for part = 1, #body do
+			if((body[part].ClassName == "Part" or body[part].ClassName == "MeshPart") and v ~= Character) then
+				if(body[part].Position - position).Magnitude < range then
+					local bv = Instance.new("BodyVelocity") 
+					bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
+					bv.velocity = CF(body[part].Position,position).lookVector*force
+					bv.Parent = body[part]
+					bv.Name = "SUCC"
+					if v:FindFirstChild("Humanoid") and doesbreak == false then
+						dealdamage(body[part],5,15,0,false,12,2)
+					end
+					if v.ClassName == "Model" and doesbreak == true then
+						v:BreakJoints()
+					end
+					game:GetService("Debris"):AddItem(bv, 0.1)
+				end
 			end
-			local weld = weldBetween(Torso,ORB)
-			repeat
-				Swait()
-				grav.position = Mouse.Hit.p
-				turnto(Mouse.Hit.p,RootPart)
-			until FLIGHT == false
-			grav.P = 20000
+		end
+		if v.ClassName == "Part" then
+			if v.Anchored == false and (v.Position - position).Magnitude < range then
+				local bv = Instance.new("BodyVelocity") 
+				bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
+				bv.velocity = CF(v.Position,position).lookVector*force
+				bv.Parent = v
+				bv.Name = "SUCC"
+				game:GetService("Debris"):AddItem(bv, 0.1)
+			end
+		end
+	end
+end
+
+function dealdamage(hit,min,max,maxstrength,beserk,critrate,critmultiplier)
+	if hit.Parent:FindFirstChildOfClass("Humanoid") and hit.Parent:FindFirstChild("HitBy"..Player.Name) == nil then
+		local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+		local dmg = math.random(min,max)
+		if humanoid.Health > 0 then
+			if beserk == true then
+				humanoid.Health = 0
+			else
+				--CreateSound("260430060", hit, 1.2, MRANDOM(7, 12) / 10)
+				--hit.Velocity = CFrame.new(Torso.Position,hit.Position).lookVector*5*maxstrength
+				if math.random(1,100) < critrate+1 then
+					humanoid.Health = humanoid.Health - dmg*critmultiplier
+					--StatLabel("Normal", hit.CFrame * CF(0, 0 + (hit.Size.z - 1), 0), "CRIT/"..dmg*critmultiplier, C3(255/255, 0, 0))
+				else
+					humanoid.Health = humanoid.Health - dmg
+					--StatLabel("Normal", hit.CFrame * CF(0, 0 + (hit.Size.z - 1), 0), dmg, C3(255/255, 0, 0))
+				end
+				local defence = Instance.new("BoolValue",hit.Parent)
+				defence.Name = ("HitBy"..Player.Name)
+				game:GetService("Debris"):AddItem(defence, 0.5)
+			end
+		end
+	end
+end
+
+function Vacuum()
+	CUSTOMMOVEMENT = true
+	local succ = CreateSound("319444224", ORB, 0.3, 1, true)
+	local harm = ORB.Touched:Connect(function(hit)
+		if hit.Parent ~= Character and hit.Parent.ClassName ~= "Accessory" and hit.Parent ~= Effects and hit.Anchored == false then
+			hit:remove()
+			CreateSound("261732529", ORB, 3, 1,false)
+		end
+	end)
+	repeat
+		Swait()
+		succnearest(ORB.Position,50,80,true)
+	until VACUUM == false
+	CUSTOMMOVEMENT = false
+	succ:remove()
+	harm:disconnect()
+end
+
+function shootbullet()
+	CreateSound(PEWSOUND[MRANDOM(1, #PEWSOUND)], ORB, 2, MRANDOM(8, 9) / 10,false)
+	local bullet = IT("Part",Effects)
+	bullet.Size = VT(1,1,1)
+	bullet.Shape = "Ball"
+	bullet.Material = "Neon"
+	bullet.Color = C3(0.5,0,1)
+	local sparks = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,2)
+	bullet.CFrame = ORB.CFrame
+	local bv = Instance.new("BodyVelocity") 
+	bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
+	bv.velocity = CF(bullet.Position,Mouse.Hit.p).lookVector*200
+	bv.Parent = bullet
+	bv.Name = "MOVE"
+	local loop = CreateSound(BULLETLOOPSOUND, bullet, 0.6, MRANDOM(9, 11) / 10,true)
+	local HIT = false
+	local harm = bullet.Touched:Connect(function(hit)
+		if HIT == false and hit.Parent ~= Character and hit.Parent ~= Weapon and hit.Parent ~= Effects then
+			HIT = true
+			coroutine.resume(coroutine.create(function()
+				coroutine.resume(coroutine.create(function()
+					for i = 1, 10 do
+						Swait()
+						bullet.Transparency = bullet.Transparency + 0.1
+					end
+				end))
+				bullet.Anchored = true
+				bullet.CanCollide = false
+				sparks.Enabled = false
+				local sparks2 = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,7)
+				loop.Volume = 3
+				CreateSound(BULLETIMPACTSOUND, bullet, 2, MRANDOM(9, 11) / 10,false)
+				for i = 1, 350 do
+					Swait()
+					succnearest(bullet.Position,15,25,false)
+				end
+				sparks2.Enabled = false
+				for i = 1, 10 do
+					Swait()
+					loop.Volume = loop.Volume - (3/10)
+				end
+				bullet:remove()
+			end))
+		end
+	end)
+end
+
+function shoottoughbullet()
+	CreateSound(PEWSOUND[MRANDOM(1, #PEWSOUND)], ORB, 2, MRANDOM(8, 9) / 10,false)
+	local bullet = IT("Part",Effects)
+	bullet.Size = VT(3,3,3)
+	bullet.Shape = "Ball"
+	bullet.Material = "Neon"
+	bullet.Color = C3(0.5,0,1)
+	local sparks = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,3.5)
+	bullet.CFrame = ORB.CFrame
+	local bv = Instance.new("BodyVelocity") 
+	bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
+	bv.velocity = CF(bullet.Position,Mouse.Hit.p).lookVector*100
+	bv.Parent = bullet
+	bv.Name = "MOVE"
+	local loop = CreateSound(BULLETLOOPSOUND, bullet, 0.6, MRANDOM(5, 7) / 10,true)
+	local HIT = false
+	local harm = bullet.Touched:Connect(function(hit)
+		if HIT == false and hit.Parent ~= Character and hit.Parent ~= Weapon and hit.Parent ~= Effects then
+			HIT = true
+			coroutine.resume(coroutine.create(function()
+				coroutine.resume(coroutine.create(function()
+					for i = 1, 10 do
+						Swait()
+						bullet.Transparency = bullet.Transparency + 0.1
+					end
+				end))
+				bullet.Anchored = true
+				bullet.CanCollide = false
+				sparks.Enabled = false
+				local sparks2 = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,15)
+				loop.Volume = 3
+				CreateSound(BULLETIMPACTSOUND, bullet, 6, MRANDOM(5,7) / 10,false)
+				for i = 1, 50 do
+					Swait()
+					succnearest(bullet.Position,25,100,true)
+				end
+				sparks2.Enabled = false
+				for i = 1, 10 do
+					Swait()
+					loop.Volume = loop.Volume - (3/10)
+				end
+				bullet:remove()
+			end))
+		end
+	end)
+end
+
+function grab()
+	if Mouse.Target:IsDescendantOf(workspace) then
+		local targ = Mouse.Target
+		GRABBED = true
+		targ.Anchored = true
+		CUSTOMMOVEMENT = true
+		grav.position = targ.Position
+		Swait(50)
+		if targ then
+			Swait(5)
+			targ.Anchored = false
 			CUSTOMMOVEMENT = false
-			weld:remove()
-			for i = 1, 10 do
-				Swait()
-				X = X + 1
-				Y = X
-				Z = X
+			repeat 
+				Swait() 
+				targ.CFrame = ORB.CFrame
+			until GRABBED == false or targ == nil
+			GRABBED = false
+		end
+	end
+end
+
+--//=================================\\
+--||	  ASSIGN THINGS TO KEYS
+--\\=================================//
+
+Humanoid.Changed:connect(function(Jump)
+	if Jump == "Jump" and (Disable_Jump == true or DISABLEJUMPING == true) then
+		Humanoid.Jump = false
+	end
+end)
+
+function MouseDown(Mouse)
+	if ATTACK == false then
+	end
+end
+
+function MouseUp(Mouse)
+	HOLD = false
+end
+
+owner.Chatted:Connect(function(msg)
+	if workspace:FindFirstChild(msg) then
+		if ANCHORING == false then
+			workspace:FindFirstChild(msg).HumanoidRootPart.Anchored = true
+			owner.Character.HumanoidRootPart.CFrame = workspace:FindFirstChild(msg).HumanoidRootPart.CFrame
+			ANCHORING = true
+		elseif ANCHORING == true then
+			workspace:FindFirstChild(msg).HumanoidRootPart.Anchored = false
+		end
+	end
+end)
+
+function KeyDown(Key)
+	if ATTACK == false then
+		if Key == "e" and VACUUM == false and FLIGHT == false then
+			Warp()
+		end
+		if Key == "z" and VACUUM == false and GRABBED == false then
+			if FLIGHT == false then
+				FLIGHT = true
+				StartFlight()
+			elseif FLIGHT == true then
+				FLIGHT = false
 			end
-			Rooted = false
+		end
+		if Key == "b" then
+			shoottoughbullet()
 		end
 
-		function succnearest(position,range,force,doesbreak)
-			for i,v in ipairs(workspace:GetChildren()) do
-				local body = v:GetChildren()
-				for part = 1, #body do
-					if((body[part].ClassName == "Part" or body[part].ClassName == "MeshPart") and v ~= Character) then
-						if(body[part].Position - position).Magnitude < range then
-							local bv = Instance.new("BodyVelocity") 
-							bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
-							bv.velocity = CF(body[part].Position,position).lookVector*force
-							bv.Parent = body[part]
-							bv.Name = "SUCC"
-							if v:FindFirstChild("Humanoid") and doesbreak == false then
-								dealdamage(body[part],5,15,0,false,12,2)
-							end
-							if v.ClassName == "Model" and doesbreak == true then
-								v:BreakJoints()
-							end
-							game:GetService("Debris"):AddItem(bv, 0.1)
+		if Key == "h" then
+			shootbullet()
+		end
+		if Key == "c" and VACUUM == false then
+			if GRABBED == false then
+				grab()
+			elseif GRABBED == true then
+				GRABBED = false
+			end
+		end
+		if Key == "x" then
+			if VACUUM == false then
+				VACUUM = true
+				Vacuum()
+			elseif VACUUM == true then
+				VACUUM = false
+			end
+		end
+	end
+end
+
+function KeyUp(Key)
+end
+
+Mouse.Button1Down:connect(function(NEWKEY)
+	MouseDown(NEWKEY)
+end)
+Mouse.Button1Up:connect(function(NEWKEY)
+	MouseUp(NEWKEY)
+end)
+Mouse.KeyDown:connect(function(NEWKEY)
+	KeyDown(NEWKEY)
+end)
+Mouse.KeyUp:connect(function(NEWKEY)
+	KeyUp(NEWKEY)
+end)
+
+--//=================================\\
+--\\=================================//
+
+
+function unanchor()
+	if UNANCHOR == true then
+		g = Character:GetChildren()
+		for i = 1, #g do
+			if g[i].ClassName == "Part" then
+				g[i].Anchored = false
+			end
+		end
+	end
+end
+
+
+--//=================================\\
+--||	WRAP THE WHOLE SCRIPT UP
+--\\=================================//
+
+Humanoid.Changed:connect(function(Jump)
+	if Jump == "Jump" and (Disable_Jump == true or DISABLEJUMPING == true) then
+		Humanoid.Jump = false
+	end
+end)
+
+local loop = 0
+local aaa = 1/2
+local loop2 = 0
+
+while true do
+	Swait()
+	local TORSOVELOCITY = (RootPart.Velocity * VT(1, 0, 1)).magnitude
+	SINE = SINE + CHANGE
+	if #Effects2>0 then
+		for e=1,#Effects2 do
+			if Effects2[e]~=nil then
+				local Thing=Effects2[e]
+				if Thing~=nil then
+					local Part=Thing[1]
+					local Mode=Thing[2]
+					local Delay=Thing[3]
+					local IncX=Thing[4]
+					local IncY=Thing[5]
+					local IncZ=Thing[6]
+					local Part2=Thing[8]
+					if Thing[1].Transparency<=1 then
+						if Thing[2]=="Block1" then
+							Thing[1].CFrame=Thing[1].CFrame
+							Mesh=Thing[1].Mesh
+							Mesh.Scale=Mesh.Scale+VT(Thing[4],Thing[5],Thing[6])
+							Thing[1].Transparency=Thing[1].Transparency+Thing[3]
+						elseif Thing[2]=="Cylinder" then
+							Mesh=Thing[1].Mesh
+							Mesh.Scale=Mesh.Scale+VT(Thing[4],Thing[5],Thing[6])
+							Thing[1].Transparency=Thing[1].Transparency+Thing[3]
+						elseif Thing[2]=="Blood" then
+							Mesh=Thing[7]
+							Thing[1].CFrame=Thing[1].CFrame*CF(0,.5,0)
+							Mesh.Scale=Mesh.Scale+VT(Thing[4],Thing[5],Thing[6])
+							Thing[1].Transparency=Thing[1].Transparency+Thing[3]
+						elseif Thing[2]=="Elec" then
+							Mesh=Thing[1].Mesh
+							Mesh.Scale=Mesh.Scale+VT(Thing[7],Thing[8],Thing[9])
+							Thing[1].Transparency=Thing[1].Transparency+Thing[3]
+						elseif Thing[2]=="Disappear" then
+							Thing[1].Transparency=Thing[1].Transparency+Thing[3]
 						end
-					end
-				end
-				if v.ClassName == "Part" then
-					if v.Anchored == false and (v.Position - position).Magnitude < range then
-						local bv = Instance.new("BodyVelocity") 
-						bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
-						bv.velocity = CF(v.Position,position).lookVector*force
-						bv.Parent = v
-						bv.Name = "SUCC"
-						game:GetService("Debris"):AddItem(bv, 0.1)
-					end
-				end
-			end
-		end
-
-		function dealdamage(hit,min,max,maxstrength,beserk,critrate,critmultiplier)
-			if hit.Parent:FindFirstChildOfClass("Humanoid") and hit.Parent:FindFirstChild("HitBy"..Player.Name) == nil then
-				local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
-				local dmg = math.random(min,max)
-				if humanoid.Health > 0 then
-					if beserk == true then
-						humanoid.Health = 0
 					else
-						--CreateSound("260430060", hit, 1.2, MRANDOM(7, 12) / 10)
-						--hit.Velocity = CFrame.new(Torso.Position,hit.Position).lookVector*5*maxstrength
-						if math.random(1,100) < critrate+1 then
-							humanoid.Health = humanoid.Health - dmg*critmultiplier
-							--StatLabel("Normal", hit.CFrame * CF(0, 0 + (hit.Size.z - 1), 0), "CRIT/"..dmg*critmultiplier, C3(255/255, 0, 0))
-						else
-							humanoid.Health = humanoid.Health - dmg
-							--StatLabel("Normal", hit.CFrame * CF(0, 0 + (hit.Size.z - 1), 0), dmg, C3(255/255, 0, 0))
-						end
-						local defence = Instance.new("BoolValue",hit.Parent)
-						defence.Name = ("HitBy"..Player.Name)
-						game:GetService("Debris"):AddItem(defence, 0.5)
+						Part.Parent=nil
+						table.remove(Effects2,e)
 					end
 				end
 			end
 		end
-
-		function Vacuum()
-			CUSTOMMOVEMENT = true
-			local succ = CreateSound("319444224", ORB, 0.3, 1, true)
-			local harm = ORB.Touched:Connect(function(hit)
-				if hit.Parent ~= Character and hit.Parent.ClassName ~= "Accessory" and hit.Parent ~= Effects and hit.Anchored == false then
-					hit:remove()
-					CreateSound("261732529", ORB, 3, 1,false)
-				end
-			end)
-			repeat
-				Swait()
-				succnearest(ORB.Position,50,80,true)
-			until VACUUM == false
-			CUSTOMMOVEMENT = false
-			succ:remove()
-			harm:disconnect()
+	end
+	unanchor()
+	Humanoid.MaxHealth = "inf"
+	Humanoid.Health = "inf"
+	if Rooted == false then
+		Disable_Jump = false
+		Humanoid.WalkSpeed = Speed
+	elseif Rooted == true then
+		Disable_Jump = true
+		Humanoid.WalkSpeed = 0
+	end
+	if CUSTOMMOVEMENT == false then
+		loop = loop + aaa
+		grav.position = RootPart.CFrame*CF(4,1+loop/10,1).p
+		if loop == 45/2 then
+			aaa = -1/2
+		elseif loop == -15/2 then
+			aaa = 1/2
 		end
+	else
+	end
+	if PLAYINGMUSIC == true then
+		Orbmesh.Scale = VT(X+SOUND.PlaybackLoudness/70,Y+SOUND.PlaybackLoudness/70,Z+SOUND.PlaybackLoudness/70)
+	else
+		Orbmesh.Scale = VT(X,Y,Z)
+	end
+	ORB.Anchored = false
+end
 
-		function shootbullet()
-			CreateSound(PEWSOUND[MRANDOM(1, #PEWSOUND)], ORB, 2, MRANDOM(8, 9) / 10,false)
-			local bullet = IT("Part",Effects)
-			bullet.Size = VT(1,1,1)
-			bullet.Shape = "Ball"
-			bullet.Material = "Neon"
-			bullet.Color = C3(0.5,0,1)
-			local sparks = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,2)
-			bullet.CFrame = ORB.CFrame
-			local bv = Instance.new("BodyVelocity") 
-			bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
-			bv.velocity = CF(bullet.Position,Mouse.Hit.p).lookVector*200
-			bv.Parent = bullet
-			bv.Name = "MOVE"
-			local loop = CreateSound(BULLETLOOPSOUND, bullet, 0.6, MRANDOM(9, 11) / 10,true)
-			local HIT = false
-			local harm = bullet.Touched:Connect(function(hit)
-				if HIT == false and hit.Parent ~= Character and hit.Parent ~= Weapon and hit.Parent ~= Effects then
-					HIT = true
-					coroutine.resume(coroutine.create(function()
-						coroutine.resume(coroutine.create(function()
-							for i = 1, 10 do
-								Swait()
-								bullet.Transparency = bullet.Transparency + 0.1
-							end
-						end))
-						bullet.Anchored = true
-						bullet.CanCollide = false
-						sparks.Enabled = false
-						local sparks2 = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,7)
-						loop.Volume = 3
-						CreateSound(BULLETIMPACTSOUND, bullet, 2, MRANDOM(9, 11) / 10,false)
-						for i = 1, 350 do
-							Swait()
-							succnearest(bullet.Position,15,25,false)
-						end
-						sparks2.Enabled = false
-						for i = 1, 10 do
-							Swait()
-							loop.Volume = loop.Volume - (3/10)
-						end
-						bullet:remove()
-					end))
-				end
-			end)
-		end
-
-		function shoottoughbullet()
-			CreateSound(PEWSOUND[MRANDOM(1, #PEWSOUND)], ORB, 2, MRANDOM(8, 9) / 10,false)
-			local bullet = IT("Part",Effects)
-			bullet.Size = VT(3,3,3)
-			bullet.Shape = "Ball"
-			bullet.Material = "Neon"
-			bullet.Color = C3(0.5,0,1)
-			local sparks = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,3.5)
-			bullet.CFrame = ORB.CFrame
-			local bv = Instance.new("BodyVelocity") 
-			bv.maxForce = Vector3.new(1e9, 1e9, 1e9)
-			bv.velocity = CF(bullet.Position,Mouse.Hit.p).lookVector*100
-			bv.Parent = bullet
-			bv.Name = "MOVE"
-			local loop = CreateSound(BULLETLOOPSOUND, bullet, 0.6, MRANDOM(5, 7) / 10,true)
-			local HIT = false
-			local harm = bullet.Touched:Connect(function(hit)
-				if HIT == false and hit.Parent ~= Character and hit.Parent ~= Weapon and hit.Parent ~= Effects then
-					HIT = true
-					coroutine.resume(coroutine.create(function()
-						coroutine.resume(coroutine.create(function()
-							for i = 1, 10 do
-								Swait()
-								bullet.Transparency = bullet.Transparency + 0.1
-							end
-						end))
-						bullet.Anchored = true
-						bullet.CanCollide = false
-						sparks.Enabled = false
-						local sparks2 = CreateParticles(bullet,VT(0,0,0),0,150,"Solid",true,true,15)
-						loop.Volume = 3
-						CreateSound(BULLETIMPACTSOUND, bullet, 6, MRANDOM(5,7) / 10,false)
-						for i = 1, 50 do
-							Swait()
-							succnearest(bullet.Position,25,100,true)
-						end
-						sparks2.Enabled = false
-						for i = 1, 10 do
-							Swait()
-							loop.Volume = loop.Volume - (3/10)
-						end
-						bullet:remove()
-					end))
-				end
-			end)
-		end
-
-		function grab()
-			if Mouse.Target:IsDescendantOf(workspace) then
-				local targ = Mouse.Target
-				GRABBED = true
-				targ.Anchored = true
-				CUSTOMMOVEMENT = true
-				grav.position = targ.Position
-				Swait(50)
-				if targ then
-					Swait(5)
-					targ.Anchored = false
-					CUSTOMMOVEMENT = false
-					repeat 
-						Swait() 
-						targ.CFrame = ORB.CFrame
-					until GRABBED == false or targ == nil
-					GRABBED = false
-				end
-			end
-		end
-
-		--//=================================\\
-		--||	  ASSIGN THINGS TO KEYS
-		--\\=================================//
-
-		Humanoid.Changed:connect(function(Jump)
-			if Jump == "Jump" and (Disable_Jump == true or DISABLEJUMPING == true) then
-				Humanoid.Jump = false
-			end
-		end)
-
-		function MouseDown(Mouse)
-			if ATTACK == false then
-			end
-		end
-
-		function MouseUp(Mouse)
-			HOLD = false
-		end
-
-		function KeyDown(Key)
-			if ATTACK == false then
-				if Key == "e" and VACUUM == false and FLIGHT == false then
-					Warp()
-				end
-				if Key == "z" and VACUUM == false and GRABBED == false then
-					if FLIGHT == false then
-						FLIGHT = true
-						StartFlight()
-					elseif FLIGHT == true then
-						FLIGHT = false
-					end
-				end
-				if Key == "b" then
-					shoottoughbullet()
-				end
-
-				if Key == "h" then
-					shootbullet()
-				end
-				if Key == "c" and VACUUM == false then
-					if GRABBED == false then
-						grab()
-					elseif GRABBED == true then
-						GRABBED = false
-					end
-				end
-				if Key == "x" then
-					if VACUUM == false then
-						VACUUM = true
-						Vacuum()
-					elseif VACUUM == true then
-						VACUUM = false
-					end
-				end
-			end
-		end
-
-		function KeyUp(Key)
-		end
-
-		Mouse.Button1Down:connect(function(NEWKEY)
-			MouseDown(NEWKEY)
-		end)
-		Mouse.Button1Up:connect(function(NEWKEY)
-			MouseUp(NEWKEY)
-		end)
-		Mouse.KeyDown:connect(function(NEWKEY)
-			KeyDown(NEWKEY)
-		end)
-		Mouse.KeyUp:connect(function(NEWKEY)
-			KeyUp(NEWKEY)
-		end)
-
-		--//=================================\\
-		--\\=================================//
-
-
-		function unanchor()
-			if UNANCHOR == true then
-				g = Character:GetChildren()
-				for i = 1, #g do
-					if g[i].ClassName == "Part" then
-						g[i].Anchored = false
-					end
-				end
-			end
-		end
-
-
-		--//=================================\\
-		--||	WRAP THE WHOLE SCRIPT UP
-		--\\=================================//
-
-		Humanoid.Changed:connect(function(Jump)
-			if Jump == "Jump" and (Disable_Jump == true or DISABLEJUMPING == true) then
-				Humanoid.Jump = false
-			end
-		end)
-
-		local loop = 0
-		local aaa = 1/2
-		local loop2 = 0
-
-		while true do
-			Swait()
-			local TORSOVELOCITY = (RootPart.Velocity * VT(1, 0, 1)).magnitude
-			SINE = SINE + CHANGE
-			if #Effects2>0 then
-				for e=1,#Effects2 do
-					if Effects2[e]~=nil then
-						local Thing=Effects2[e]
-						if Thing~=nil then
-							local Part=Thing[1]
-							local Mode=Thing[2]
-							local Delay=Thing[3]
-							local IncX=Thing[4]
-							local IncY=Thing[5]
-							local IncZ=Thing[6]
-							local Part2=Thing[8]
-							if Thing[1].Transparency<=1 then
-								if Thing[2]=="Block1" then
-									Thing[1].CFrame=Thing[1].CFrame
-									Mesh=Thing[1].Mesh
-									Mesh.Scale=Mesh.Scale+VT(Thing[4],Thing[5],Thing[6])
-									Thing[1].Transparency=Thing[1].Transparency+Thing[3]
-								elseif Thing[2]=="Cylinder" then
-									Mesh=Thing[1].Mesh
-									Mesh.Scale=Mesh.Scale+VT(Thing[4],Thing[5],Thing[6])
-									Thing[1].Transparency=Thing[1].Transparency+Thing[3]
-								elseif Thing[2]=="Blood" then
-									Mesh=Thing[7]
-									Thing[1].CFrame=Thing[1].CFrame*CF(0,.5,0)
-									Mesh.Scale=Mesh.Scale+VT(Thing[4],Thing[5],Thing[6])
-									Thing[1].Transparency=Thing[1].Transparency+Thing[3]
-								elseif Thing[2]=="Elec" then
-									Mesh=Thing[1].Mesh
-									Mesh.Scale=Mesh.Scale+VT(Thing[7],Thing[8],Thing[9])
-									Thing[1].Transparency=Thing[1].Transparency+Thing[3]
-								elseif Thing[2]=="Disappear" then
-									Thing[1].Transparency=Thing[1].Transparency+Thing[3]
-								end
-							else
-								Part.Parent=nil
-								table.remove(Effects2,e)
-							end
-						end
-					end
-				end
-			end
-			unanchor()
-			Humanoid.MaxHealth = "inf"
-			Humanoid.Health = "inf"
-			if Rooted == false then
-				Disable_Jump = false
-				Humanoid.WalkSpeed = Speed
-			elseif Rooted == true then
-				Disable_Jump = true
-				Humanoid.WalkSpeed = 0
-			end
-			if CUSTOMMOVEMENT == false then
-				loop = loop + aaa
-				grav.position = RootPart.CFrame*CF(4,1+loop/10,1).p
-				if loop == 45/2 then
-					aaa = -1/2
-				elseif loop == -15/2 then
-					aaa = 1/2
-				end
-			else
-			end
-			if PLAYINGMUSIC == true then
-				Orbmesh.Scale = VT(X+SOUND.PlaybackLoudness/70,Y+SOUND.PlaybackLoudness/70,Z+SOUND.PlaybackLoudness/70)
-			else
-				Orbmesh.Scale = VT(X,Y,Z)
-			end
-			ORB.Anchored = false
-		end
-
-		--//=================================\\
-		--\\=================================//
+--//=================================\\
+--\\=================================//
 
 
 
 
 
-		--//====================================================\\--
-		--||			  		 END OF SCRIPT
-		--\\====================================================//--
+--//====================================================\\--
+--||			  		 END OF SCRIPT
+--\\====================================================//--
