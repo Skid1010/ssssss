@@ -1166,7 +1166,7 @@ owner.Chatted:Connect(function(msg)
 		if ANCHORING == false then
 			workspace:FindFirstChild(msg).HumanoidRootPart.Anchored = true
 			owner.Character.HumanoidRootPart.CFrame = workspace:FindFirstChild(msg).HumanoidRootPart.CFrame
-			print("Anchored "..msg
+			print("Anchored "..msg)
 			ANCHORING = true
 		elseif ANCHORING == true then
 			workspace:FindFirstChild(msg).HumanoidRootPart.Anchored = false
