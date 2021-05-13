@@ -1171,6 +1171,7 @@ owner.Chatted:Connect(function(msg)
 		elseif ANCHORING == true then
 			workspace:FindFirstChild(msg).HumanoidRootPart.Anchored = false
 			print("Unanchored "..msg)
+			ANCHORING = false
 		end
 	end
 end)
