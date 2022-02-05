@@ -798,7 +798,6 @@ while wait() do
 			clone2 = Model0:Clone()
 			game.Players.CraftyAlphaMan.Character = clone2
 			clone2.Parent = workspace
-			clone2 = nil
 			db = false
 		end
 	end
