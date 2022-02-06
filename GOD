@@ -1,0 +1,17 @@
+game.Players.CraftyAlphaMan.Character.Archivable = true
+Model0 = game.Players.CraftyAlphaMan.Character:Clone()
+Model0.Parent = game.Lighting
+clone = Model0:Clone()
+game.Players.CraftyAlphaMan.Character = clone
+clone.Parent = workspace
+db = false
+game.Workspace.DescendantRemoving:Connect(function(v)
+	if v == game.Players.CraftyAlphaMan.Character then
+		if db == false then
+			db = true
+			game.Players.CraftyAlphaMan.Character = Model0:Clone()
+			game.Players.CraftyAlphaMan.Character = game.Workspace
+			db = false
+		end
+	end
+end)
